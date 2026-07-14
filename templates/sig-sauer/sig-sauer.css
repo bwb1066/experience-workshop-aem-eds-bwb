@@ -217,11 +217,12 @@ body.sig-sauer-template header .main-nav-list {
 
 body.sig-sauer-template header .main-nav-section a {
   display: block;
+  font-family: var(--sig-display);
+  font-size: 14px;
+  font-weight: 500;
   line-height: var(--header-height, 64px);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  font-weight: 700;
-  font-size: 0.8rem;
   white-space: nowrap;
 }
 

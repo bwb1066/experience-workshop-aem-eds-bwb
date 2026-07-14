@@ -6,7 +6,7 @@ export default function init() {
   // Point the favicon at SIG's icon (co-located with this template). Resolved
   // against the module URL so it works on any branch/origin. Overrides the
   // container default without affecting other clients.
-  const href = new URL('./favicon.png', import.meta.url).href;
+  const { href } = new URL('./favicon.png', import.meta.url);
   document.head.querySelectorAll('link[rel~="icon"]').forEach((l) => l.remove());
   const link = document.createElement('link');
   link.rel = 'icon';

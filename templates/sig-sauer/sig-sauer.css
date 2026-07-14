@@ -1,0 +1,106 @@
+/*
+ * SIG SAUER — client concept template
+ * Scoped entirely under body.sig-sauer-template (activated by page metadata
+ * `template: sig-sauer`). Stark monochrome identity: black canvas, white
+ * uppercase condensed display type, high-contrast CTAs. Image-free by design —
+ * swap in product photography by uploading assets to DA and referencing them.
+ */
+
+body.sig-sauer-template {
+  --sig-black: #0a0a0a;
+  --sig-ink: #fff;
+  --sig-muted: #9a9a9a;
+  --sig-line: rgb(255 255 255 / 14%);
+  --sig-accent: #c8102e; /* used sparingly */
+  --sig-max: 1200px;
+  --sig-display: 'Arial Narrow', 'Helvetica Neue', helvetica, arial, sans-serif;
+
+  background: var(--sig-black);
+  color: var(--sig-ink);
+  font-family: helvetica, arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.sig-sauer-template main .section { padding: 56px 24px; }
+body.sig-sauer-template main .section > div { max-width: var(--sig-max); margin-inline: auto; }
+
+/* Display type */
+body.sig-sauer-template main h1,
+body.sig-sauer-template main h2,
+body.sig-sauer-template main h3 {
+  font-family: var(--sig-display);
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  margin: 0 0 0.35em;
+}
+
+body.sig-sauer-template main h1 { font-size: clamp(3rem, 9vw, 7rem); }
+body.sig-sauer-template main h2 { font-size: clamp(1.75rem, 4vw, 3rem); }
+body.sig-sauer-template main p { color: var(--sig-muted); font-size: 1.05rem; line-height: 1.6; }
+
+/* Hero — text-driven, full-bleed black */
+body.sig-sauer-template .hero {
+  min-height: 82vh;
+  display: grid;
+  align-content: center;
+  gap: 1.5rem;
+  text-align: center;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgb(255 255 255 / 6%), transparent 60%),
+    var(--sig-black);
+}
+body.sig-sauer-template .hero h1 { text-shadow: 0 2px 40px rgb(0 0 0 / 60%); }
+body.sig-sauer-template .hero p:first-of-type {
+  color: var(--sig-ink);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+
+/* Category cards */
+body.sig-sauer-template .card {
+  background: #141414;
+  border: 1px solid var(--sig-line);
+  padding: 28px 24px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+body.sig-sauer-template .card:hover { border-color: var(--sig-ink); transform: translateY(-3px); }
+body.sig-sauer-template .card strong {
+  display: block;
+  font-family: var(--sig-display);
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  color: var(--sig-ink);
+  margin-bottom: 6px;
+}
+body.sig-sauer-template .card strong::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 3px;
+  margin-top: 10px;
+  background: var(--sig-accent);
+}
+
+/* Buttons (ak.js decorates strong -> primary, em -> secondary) */
+body.sig-sauer-template .btn {
+  display: inline-block;
+  padding: 0.85em 2em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid var(--sig-ink);
+}
+body.sig-sauer-template .btn-primary { background: var(--sig-ink); color: var(--sig-black); }
+body.sig-sauer-template .btn-secondary { background: transparent; color: var(--sig-ink); }
+body.sig-sauer-template .btn:hover { background: var(--sig-accent); border-color: var(--sig-accent); color: var(--sig-ink); }
+body.sig-sauer-template .btn-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+@media (min-width: 900px) {
+  body.sig-sauer-template main .section { padding: 88px 40px; }
+}

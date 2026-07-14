@@ -6,6 +6,10 @@
  * swap in product photography by uploading assets to DA and referencing them.
  */
 
+/* SIG's licensed display face (Stratum 2) via Adobe Fonts. Imported here so it
+   loads only on Sig pages, not globally. Family: "stratum-2-web" (weights 400/700). */
+@import url("https://use.typekit.net/irh5vcs.css");
+
 body.sig-sauer-template {
   --sig-black: #0a0a0a;
   --sig-ink: #fff;
@@ -13,10 +17,7 @@ body.sig-sauer-template {
   --sig-line: rgb(255 255 255 / 14%);
   --sig-accent: #eeaf03; /* SIG yellow (rgb 238 175 0) */
   --sig-max: 1200px;
-
-  /* Stratum2 is SIG's licensed display face — add the woff2 + an @font-face to
-     render it for real; falls back to Helvetica Neue until then. */
-  --sig-display: stratum2, 'Helvetica Neue', helvetica, arial, sans-serif;
+  --sig-display: 'stratum-2-web', 'Helvetica Neue', helvetica, arial, sans-serif;
 
   background: var(--sig-black);
   color: var(--sig-ink);
@@ -37,7 +38,7 @@ body.sig-sauer-template main h2,
 body.sig-sauer-template main h3 {
   font-family: var(--sig-display);
   text-transform: uppercase;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 0.95;
   margin: 0 0 0.35em;
@@ -89,7 +90,7 @@ body.sig-sauer-template .card strong {
   display: block;
   font-family: var(--sig-display);
   text-transform: uppercase;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.5rem;
   letter-spacing: 0.02em;
   color: var(--sig-ink);
@@ -111,6 +112,7 @@ body.sig-sauer-template .card strong::after {
 body.sig-sauer-template .btn {
   display: inline-block;
   padding: 0.85em 2em;
+  font-family: var(--sig-display);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 700;
@@ -185,7 +187,7 @@ body.sig-sauer-template header a {
 body.sig-sauer-template header .brand-text {
   font-family: var(--sig-display);
   text-transform: uppercase;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.14em;
   font-size: 1.3rem;
   color: var(--sig-ink);

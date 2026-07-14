@@ -1,0 +1,102 @@
+/*
+ * CLIENT STARTER TEMPLATE
+ * =======================
+ * Clone this folder per client:
+ *   templates/client-starter  ->  templates/<client>   (e.g. templates/ptc)
+ * then rename both files to match and swap this selector to `.<client>-template`.
+ *
+ * A page activates it with page metadata `template: <client>`. ak.js then loads
+ * templates/<client>/<client>.css and adds `body.<client>-template`, so EVERY
+ * rule below is namespaced to this client and can never leak into another.
+ *
+ * Start from the prospect's real homepage: pull their brand colors/fonts into
+ * the tokens below, then style the standard blocks (hero, columns, cards, …)
+ * to match. Keep it all under the body scope.
+ */
+
+body.client-starter-template {
+  /* Brand tokens — set these from the prospect's site */
+  --client-primary: #1473e6;
+  --client-primary-ink: #fff;
+  --client-ink: #1a1a1a;
+  --client-bg: #fff;
+  --client-muted: #6b7280;
+  --client-max-width: 1200px;
+  --client-font: -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif;
+
+  color: var(--client-ink);
+  background: var(--client-bg);
+  font-family: var(--client-font);
+}
+
+/* Section rhythm */
+body.client-starter-template main .section {
+  padding: 48px 24px;
+}
+
+body.client-starter-template main .section > div {
+  max-width: var(--client-max-width);
+  margin-inline: auto;
+}
+
+/* Headings */
+body.client-starter-template main h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.4em;
+}
+
+body.client-starter-template main h2 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  letter-spacing: -0.01em;
+}
+
+/* Hero — the block collection ships a `hero` block */
+body.client-starter-template .hero {
+  position: relative;
+  min-height: 60vh;
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+  padding: 64px 24px;
+}
+
+body.client-starter-template .hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Buttons — ak.js decorates links to .btn/.btn-primary/.btn-secondary */
+body.client-starter-template .btn {
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+body.client-starter-template .btn-primary {
+  background: var(--client-primary);
+  color: var(--client-primary-ink);
+}
+
+body.client-starter-template .btn-secondary {
+  background: transparent;
+  color: var(--client-primary);
+  box-shadow: inset 0 0 0 2px var(--client-primary);
+}
+
+body.client-starter-template .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 15%);
+}
+
+@media (min-width: 900px) {
+  body.client-starter-template main .section { padding: 72px 40px; }
+}

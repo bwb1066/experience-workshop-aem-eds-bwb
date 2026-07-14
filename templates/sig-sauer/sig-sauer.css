@@ -11,9 +11,12 @@ body.sig-sauer-template {
   --sig-ink: #fff;
   --sig-muted: #9a9a9a;
   --sig-line: rgb(255 255 255 / 14%);
-  --sig-accent: #c8102e; /* used sparingly */
+  --sig-accent: #eeaf03; /* SIG yellow (rgb 238 175 0) */
   --sig-max: 1200px;
-  --sig-display: 'Arial Narrow', 'Helvetica Neue', helvetica, arial, sans-serif;
+
+  /* Stratum2 is SIG's licensed display face — add the woff2 + an @font-face to
+     render it for real; falls back to Helvetica Neue until then. */
+  --sig-display: stratum2, 'Helvetica Neue', helvetica, arial, sans-serif;
 
   background: var(--sig-black);
   color: var(--sig-ink);
@@ -102,7 +105,9 @@ body.sig-sauer-template .card strong::after {
   background: var(--sig-accent);
 }
 
-/* Buttons (ak.js decorates strong -> primary, em -> secondary) */
+/* Buttons — palette: SIG yellow #eeaf03, white, black.
+   ak.js decorates: strong -> btn-primary (solid), em -> btn-secondary (open),
+   underlined link -> btn-outline (underline). */
 body.sig-sauer-template .btn {
   display: inline-block;
   padding: 0.85em 2em;
@@ -110,23 +115,49 @@ body.sig-sauer-template .btn {
   letter-spacing: 0.08em;
   font-weight: 700;
   text-decoration: none;
-  border: 2px solid var(--sig-ink);
+  border: 2px solid transparent;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
+/* Solid CTA — yellow fill, black text */
 body.sig-sauer-template .btn-primary {
-  background: var(--sig-ink);
+  background: var(--sig-accent);
+  border-color: var(--sig-accent);
   color: var(--sig-black);
 }
 
+body.sig-sauer-template .btn-primary:hover {
+  background: var(--sig-ink);
+  border-color: var(--sig-ink);
+  color: var(--sig-black);
+}
+
+/* Open CTA — white outline + white text, fills yellow on hover */
 body.sig-sauer-template .btn-secondary {
   background: transparent;
+  border-color: var(--sig-ink);
   color: var(--sig-ink);
 }
 
-body.sig-sauer-template .btn:hover {
+body.sig-sauer-template .btn-secondary:hover {
   background: var(--sig-accent);
   border-color: var(--sig-accent);
+  color: var(--sig-black);
+}
+
+/* Underline CTA — text-only link, yellow underline on hover */
+body.sig-sauer-template .btn-outline {
+  padding: 0.85em 0;
+  border: 0;
   color: var(--sig-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--sig-accent);
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+
+body.sig-sauer-template .btn-outline:hover {
+  color: var(--sig-accent);
 }
 
 body.sig-sauer-template .btn-group {
@@ -157,6 +188,13 @@ body.sig-sauer-template header .brand-text {
   font-weight: 800;
   letter-spacing: 0.14em;
   font-size: 1.3rem;
+  color: var(--sig-ink);
+  transition: color 0.15s ease;
+}
+
+/* Logo: white, yellow on hover */
+body.sig-sauer-template header .brand-section a:hover .brand-text {
+  color: var(--sig-accent);
 }
 
 body.sig-sauer-template header .main-nav-section a {

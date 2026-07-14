@@ -22,7 +22,11 @@ body.sig-sauer-template {
 }
 
 body.sig-sauer-template main .section { padding: 56px 24px; }
-body.sig-sauer-template main .section > div { max-width: var(--sig-max); margin-inline: auto; }
+
+body.sig-sauer-template main .section > div {
+  max-width: var(--sig-max);
+  margin-inline: auto;
+}
 
 /* Display type */
 body.sig-sauer-template main h1,
@@ -38,7 +42,12 @@ body.sig-sauer-template main h3 {
 
 body.sig-sauer-template main h1 { font-size: clamp(3rem, 9vw, 7rem); }
 body.sig-sauer-template main h2 { font-size: clamp(1.75rem, 4vw, 3rem); }
-body.sig-sauer-template main p { color: var(--sig-muted); font-size: 1.05rem; line-height: 1.6; }
+
+body.sig-sauer-template main p {
+  color: var(--sig-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
 
 /* Hero — text-driven, full-bleed black */
 body.sig-sauer-template .hero {
@@ -52,6 +61,7 @@ body.sig-sauer-template .hero {
     var(--sig-black);
 }
 body.sig-sauer-template .hero h1 { text-shadow: 0 2px 40px rgb(0 0 0 / 60%); }
+
 body.sig-sauer-template .hero p:first-of-type {
   color: var(--sig-ink);
   font-size: clamp(1rem, 2vw, 1.4rem);
@@ -66,7 +76,12 @@ body.sig-sauer-template .card {
   padding: 28px 24px;
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
-body.sig-sauer-template .card:hover { border-color: var(--sig-ink); transform: translateY(-3px); }
+
+body.sig-sauer-template .card:hover {
+  border-color: var(--sig-ink);
+  transform: translateY(-3px);
+}
+
 body.sig-sauer-template .card strong {
   display: block;
   font-family: var(--sig-display);
@@ -77,6 +92,7 @@ body.sig-sauer-template .card strong {
   color: var(--sig-ink);
   margin-bottom: 6px;
 }
+
 body.sig-sauer-template .card strong::after {
   content: '';
   display: block;
@@ -96,11 +112,82 @@ body.sig-sauer-template .btn {
   text-decoration: none;
   border: 2px solid var(--sig-ink);
 }
-body.sig-sauer-template .btn-primary { background: var(--sig-ink); color: var(--sig-black); }
-body.sig-sauer-template .btn-secondary { background: transparent; color: var(--sig-ink); }
-body.sig-sauer-template .btn:hover { background: var(--sig-accent); border-color: var(--sig-accent); color: var(--sig-ink); }
-body.sig-sauer-template .btn-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-@media (min-width: 900px) {
+body.sig-sauer-template .btn-primary {
+  background: var(--sig-ink);
+  color: var(--sig-black);
+}
+
+body.sig-sauer-template .btn-secondary {
+  background: transparent;
+  color: var(--sig-ink);
+}
+
+body.sig-sauer-template .btn:hover {
+  background: var(--sig-accent);
+  border-color: var(--sig-accent);
+  color: var(--sig-ink);
+}
+
+body.sig-sauer-template .btn-group {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (width >= 900px) {
   body.sig-sauer-template main .section { padding: 88px 40px; }
+}
+
+/* Header / nav (per-client fragment /sig-sauer/nav/header) — color + type only;
+   the base header block handles layout. */
+body.sig-sauer-template header {
+  background: var(--sig-black);
+  border-bottom: 1px solid var(--sig-line);
+}
+
+body.sig-sauer-template header a {
+  color: var(--sig-ink);
+}
+
+body.sig-sauer-template header .brand-text {
+  font-family: var(--sig-display);
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  font-size: 1.3rem;
+}
+
+body.sig-sauer-template header .main-nav-section a {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+body.sig-sauer-template header .main-nav-section a:hover {
+  color: var(--sig-accent);
+}
+
+/* Footer (per-client fragment /sig-sauer/nav/footer) */
+body.sig-sauer-template footer {
+  background: #050505;
+  color: var(--sig-muted);
+  border-top: 1px solid var(--sig-line);
+}
+
+body.sig-sauer-template footer a {
+  color: var(--sig-muted);
+  text-decoration: none;
+}
+
+body.sig-sauer-template footer a:hover {
+  color: var(--sig-ink);
+}
+
+body.sig-sauer-template footer strong {
+  color: var(--sig-ink);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }

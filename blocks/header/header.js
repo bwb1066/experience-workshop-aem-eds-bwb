@@ -1,5 +1,5 @@
 import { getConfig, getMetadata } from '../../scripts/ak.js';
-import { loadFragment } from '../fragment/fragment.js';
+import { loadFragment, loadFirstFragment, clientSegment } from '../fragment/fragment.js';
 import { setColorScheme } from '../section-metadata/section-metadata.js';
 
 const { locale } = getConfig();
@@ -140,10 +140,13 @@ function decorateNavItem(li) {
 function decorateBrandSection(section) {
   section.classList.add('brand-section');
   const brandLink = section.querySelector('a');
-  const [, text] = brandLink.childNodes;
+  // Wrap the brand's text label. Works whether or not the link has a leading
+  // icon (icon + text, or text-only for wordmark brands like SIG SAUER).
+  const textNode = [...brandLink.childNodes]
+    .find((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
   const span = document.createElement('span');
   span.className = 'brand-text';
-  span.append(text);
+  if (textNode) span.append(textNode);
   brandLink.append(span);
 }
 
@@ -184,10 +187,18 @@ async function decorateHeader(fragment) {
  * @param {Element} el The header element
  */
 export default async function init(el) {
-  const headerMeta = getMetadata('header');
-  const path = headerMeta || HEADER_PATH;
+  // Resolve the nav fragment: explicit `nav` metadata override, then the
+  // per-client fragment (/<client>/nav/header), then the shared default.
+  // Author a per-client nav to brand it; omit it to inherit the default.
+  const explicit = getMetadata('nav');
+  const client = clientSegment();
+  const candidates = [
+    explicit && `${locale.prefix}${explicit}`,
+    client && `${locale.prefix}/${client}/nav/header`,
+    `${locale.prefix}${HEADER_PATH}`,
+  ];
   try {
-    const fragment = await loadFragment(`${locale.prefix}${path}`);
+    const fragment = await loadFirstFragment(candidates);
     fragment.classList.add('header-content');
     await decorateHeader(fragment);
     el.append(fragment);

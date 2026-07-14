@@ -2,6 +2,60 @@
  * SIG SAUER template JS. Loaded in the lazy phase (scripts/lazy.js) only when a
  * page sets `template: sig-sauer`, so this runs on Sig pages only.
  */
+
+// Compact inline icons (feather-style, currentColor).
+const ICONS = {
+  search: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+  pin: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  announce: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>',
+  cart: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>',
+  user: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 1 0-16 0"/><circle cx="12" cy="8" r="4"/></svg>',
+};
+
+/** Resolve once the selector appears (header loads async, post-LCP). */
+function whenReady(selector, timeout = 6000) {
+  return new Promise((resolve) => {
+    const found = document.querySelector(selector);
+    if (found) {
+      resolve(found);
+      return;
+    }
+    const obs = new MutationObserver(() => {
+      const el = document.querySelector(selector);
+      if (el) {
+        obs.disconnect();
+        resolve(el);
+      }
+    });
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(() => {
+      obs.disconnect();
+      resolve(document.querySelector(selector));
+    }, timeout);
+  });
+}
+
+/** Inject the SIG right-side utilities (search + icons) into the header actions cell. */
+async function injectUtils() {
+  const content = await whenReady('header .header-content');
+  if (!content || content.querySelector('.sig-utils')) return;
+
+  const utils = document.createElement('div');
+  utils.className = 'sig-utils';
+  utils.innerHTML = `
+    <form class="sig-search" role="search">
+      <input type="search" placeholder="Search Site" aria-label="Search site">
+      <button type="submit" aria-label="Search">${ICONS.search}</button>
+    </form>
+    <a class="sig-icon" href="/sig-sauer/dealers" aria-label="Find a store">${ICONS.pin}</a>
+    <a class="sig-icon" href="/sig-sauer/news" aria-label="Announcements">${ICONS.announce}</a>
+    <a class="sig-icon" href="/sig-sauer/cart" aria-label="Cart">${ICONS.cart}</a>
+    <a class="sig-icon" href="/sig-sauer/account" aria-label="Account">${ICONS.user}</a>
+  `;
+  utils.querySelector('.sig-search').addEventListener('submit', (e) => e.preventDefault());
+  content.append(utils);
+}
+
 export default function init() {
   // Point the favicon at SIG's icon (co-located with this template). Resolved
   // against the module URL so it works on any branch/origin. Overrides the
@@ -13,4 +67,6 @@ export default function init() {
   link.type = 'image/png';
   link.href = href;
   document.head.appendChild(link);
+
+  injectUtils();
 }

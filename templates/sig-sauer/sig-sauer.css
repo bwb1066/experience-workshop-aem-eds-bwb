@@ -238,7 +238,21 @@ body.sig-sauer-template header .brand-section:hover .sig-logo {
 }
 
 body.sig-sauer-template header .main-nav-list {
+  flex-wrap: nowrap;
   align-items: center;
+}
+
+/* Lock every nav item to the bar height on one line so a stray sub-list or a
+   wrapping label can't stagger the row. */
+body.sig-sauer-template header .main-nav-item {
+  display: flex;
+  align-items: center;
+  height: var(--header-height, 64px);
+  overflow: hidden;
+}
+
+body.sig-sauer-template header .main-nav-item ul {
+  display: none;
 }
 
 body.sig-sauer-template header .main-nav-section a {

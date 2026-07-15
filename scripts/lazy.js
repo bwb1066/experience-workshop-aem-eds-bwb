@@ -5,7 +5,9 @@ import { getMetadata } from './ak.js';
 // `loadTemplate` in ak.js loads templates/<name>/<name>.css, but not JS, so we
 // import the matching module here when present. Missing module = no-op.
 function loadTemplateScript() {
-  const template = getMetadata('template');
+  // Explicit `template` metadata, else the URL's client folder (see CLIENTS.md).
+  const [client] = window.location.pathname.split('/').filter(Boolean);
+  const template = getMetadata('template') || client;
   if (!template) return;
   const name = template.replaceAll(' ', '-').toLowerCase();
   import(`../templates/${name}/${name}.js`)

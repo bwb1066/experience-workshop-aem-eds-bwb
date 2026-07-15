@@ -25,8 +25,11 @@ const DEFAULTS = {
 };
 
 export default async function loadBrandChat() {
-  const siteKey = getMetadata('concierge-site');
-  if (!siteKey) return; // chat is opt-in per page
+  // Explicit `concierge-site` metadata, else the URL's client folder — so every
+  // /<client>/ page gets that brand's chat automatically (see CLIENTS.md).
+  const [client] = window.location.pathname.split('/').filter(Boolean);
+  const siteKey = getMetadata('concierge-site') || client;
+  if (!siteKey) return;
 
   const options = {
     supabaseUrl: getMetadata('concierge-url') || DEFAULTS.url,

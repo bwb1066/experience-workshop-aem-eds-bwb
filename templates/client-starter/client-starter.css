@@ -97,6 +97,6 @@ body.client-starter-template .btn:hover {
   box-shadow: 0 6px 18px rgb(0 0 0 / 15%);
 }
 
-@media (min-width: 900px) {
+@media (width >= 900px) {
   body.client-starter-template main .section { padding: 72px 40px; }
 }

@@ -504,3 +504,42 @@ body.sig-sauer-template footer .socials a[href*="sezzle"] {
   text-transform: lowercase;
   color: var(--sig-ink);
 }
+
+/* Footer logo (SIG SAUER / NEVER SETTLE) — forced white */
+body.sig-sauer-template footer img {
+  width: auto;
+  height: 60px;
+  filter: brightness(0) invert(1);
+}
+
+/* Sign-up form */
+body.sig-sauer-template footer .sign-up-form-fields {
+  max-width: 520px;
+}
+
+body.sig-sauer-template footer .sign-up-form-fields input {
+  border: 1px solid var(--sig-line);
+  border-radius: 2px;
+  background: #1c1c1c;
+  color: var(--sig-ink);
+}
+
+body.sig-sauer-template footer .sign-up-form-fields input::placeholder {
+  color: var(--sig-muted);
+}
+
+body.sig-sauer-template footer .sign-up-form-fields button {
+  border: 2px solid var(--sig-accent);
+  background: transparent;
+  color: var(--sig-accent);
+  font-family: var(--sig-display);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+body.sig-sauer-template footer .sign-up-form-fields button:hover {
+  background: var(--sig-accent);
+  color: var(--sig-black);
+}

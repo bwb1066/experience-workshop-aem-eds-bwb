@@ -15,7 +15,7 @@ body.sig-sauer-template {
   --sig-ink: #fff;
   --sig-muted: #9a9a9a;
   --sig-line: rgb(255 255 255 / 14%);
-  --sig-accent: #eeaf00; /* SIG yellow — rgb(238, 175, 0) */
+  --sig-accent: #eeaf03; /* SIG yellow */
   --sig-max: 1200px;
   --sig-display: 'stratum-2-web', 'Helvetica Neue', helvetica, arial, sans-serif;
 
@@ -71,6 +71,57 @@ body.sig-sauer-template .hero p:first-of-type {
   font-size: clamp(1rem, 2vw, 1.4rem);
   letter-spacing: 0.35em;
   text-transform: uppercase;
+}
+
+/* Recall notice band — authored as an image-less hero; render as a full-width
+   yellow band with centered dark text (overrides the dark hero styling). */
+body.sig-sauer-template main .section:has(.hero br) {
+  padding-block: 34px;
+  background: var(--sig-accent);
+}
+
+body.sig-sauer-template main .section:has(.hero br) .hero {
+  min-height: 0;
+  display: block;
+  padding: 0;
+  background: none;
+  text-align: center;
+}
+
+/* Undo the base hero's foreground grid + constrained text column so the
+   notices span the full band width. */
+body.sig-sauer-template main .section:has(.hero br) .hero-foreground {
+  display: block;
+  min-height: 0;
+}
+
+body.sig-sauer-template main .section:has(.hero br) .hero * {
+  max-width: none;
+  width: auto;
+  margin-inline: 0;
+}
+
+body.sig-sauer-template main .section:has(.hero br) .hero p {
+  margin: 0;
+  color: #10121a;
+  font-family: var(--sig-display);
+  font-size: 15px;
+  line-height: 2;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+body.sig-sauer-template main .section:has(.hero br) .hero strong {
+  font-weight: 700;
+}
+
+body.sig-sauer-template main .section:has(.hero br) .hero a {
+  color: #10121a;
+  text-decoration: none;
+}
+
+body.sig-sauer-template main .section:has(.hero br) .hero a:hover {
+  text-decoration: underline;
 }
 
 /* Category cards */

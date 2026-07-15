@@ -328,3 +328,75 @@ body.sig-sauer-template footer strong {
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
+
+/* Socials row — authored as plain links in a section styled `socials`; each link
+   is turned into its icon by matching the URL (no per-link classes needed). The
+   icon is a CSS mask filled with the link color, so it's white and hovers yellow. */
+body.sig-sauer-template footer .socials .default-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+body.sig-sauer-template footer .socials p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  margin: 0;
+}
+
+body.sig-sauer-template footer .socials p:first-child a {
+  display: block;
+  width: 28px;
+  height: 28px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 200%;
+  color: var(--sig-ink);
+  background-color: currentcolor;
+  transition: color 0.15s ease;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+body.sig-sauer-template footer .socials p:first-child a:hover {
+  color: var(--sig-accent);
+}
+
+body.sig-sauer-template footer .socials a[href*="instagram"] {
+  mask-image: url("/img/icons/instagram.svg");
+}
+
+body.sig-sauer-template footer .socials a[href*="facebook"] {
+  mask-image: url("/img/icons/facebook.svg");
+}
+
+body.sig-sauer-template footer .socials a[href*="youtube"] {
+  mask-image: url("/img/icons/youtube.svg");
+}
+
+body.sig-sauer-template footer .socials a[href*="twitter"] {
+  mask-image: url("/img/icons/x.svg");
+}
+
+body.sig-sauer-template footer .socials a[href*="linkedin"] {
+  mask-image: url("/img/icons/linkedin.svg");
+}
+
+body.sig-sauer-template footer .socials a[href$="/social"] {
+  mask-image: url("/img/icons/sig.svg");
+}
+
+/* Sezzle — wordmark (second row); not masked */
+body.sig-sauer-template footer .socials a[href*="sezzle"] {
+  font-family: var(--sig-display);
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+  color: var(--sig-ink);
+}

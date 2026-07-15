@@ -529,6 +529,7 @@ body.sig-sauer-template footer .section:has(.btn) img {
 body.sig-sauer-template footer .section:has(.sign-up-form) {
   position: relative;
   z-index: 0;
+  overflow: hidden;
 }
 
 /* The DA-authored monogram has no viewBox, so it can't scale as a content image.
@@ -548,7 +549,7 @@ body.sig-sauer-template footer .section:has(.sign-up-form)::before {
   background-color: var(--sig-ink);
   opacity: 0.09;
   transform: translate(-50%, -50%);
-  mask-image: url("watermark.svg"), linear-gradient(115deg, #000 10%, transparent 78%);
+  mask-image: url("watermark.svg"), linear-gradient(to bottom, #000 50%, transparent 100%);
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain, 100% 100%;
@@ -568,6 +569,7 @@ body.sig-sauer-template footer .section:has(.sign-up-form) h3 {
   text-transform: uppercase;
   white-space: nowrap;
   text-align: center;
+  margin-bottom: 28px;
 }
 
 body.sig-sauer-template footer .section:has(.sign-up-form) .sign-up-form-fields {

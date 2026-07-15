@@ -314,6 +314,7 @@ body.sig-sauer-template header .sig-search input {
   outline: none;
   background: transparent;
   color: var(--sig-ink);
+  font-family: var(--sig-display);
   font-size: 0.8rem;
 }
 
@@ -379,7 +380,7 @@ body.sig-sauer-template footer .footer-content {
    a sub-list. Flow the groups into columns; render headings as headings, not the
    yellow .btn that ak.js turns bold links into. */
 body.sig-sauer-template footer .footer-content .default-content > ul {
-  column-count: 4;
+  column-count: 3;
   column-gap: 40px;
   margin: 0;
   padding: 0;
@@ -505,11 +506,54 @@ body.sig-sauer-template footer .socials a[href*="sezzle"] {
   color: var(--sig-ink);
 }
 
-/* Footer logo (SIG SAUER / NEVER SETTLE) — forced white */
-body.sig-sauer-template footer img {
+/* Footer logo (SIG SAUER / NEVER SETTLE) — in the menu section, forced white */
+body.sig-sauer-template footer .section:has(.btn) img {
   width: auto;
   height: 60px;
+  margin-bottom: 32px;
   filter: brightness(0) invert(1);
+}
+
+/* SIG monogram watermark — the image authored in the sign-up section, dropped
+   behind the form as a faint backdrop. */
+body.sig-sauer-template footer .section:has(.sign-up-form) {
+  position: relative;
+  z-index: 0;
+}
+
+/* The DA-authored monogram has no viewBox, so it can't scale as a content image.
+   Render the watermark from CSS (mask fill) instead and hide the authored copy. */
+body.sig-sauer-template footer .section:has(.sign-up-form) img {
+  display: none;
+}
+
+body.sig-sauer-template footer .section:has(.sign-up-form)::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: 620px;
+  height: 620px;
+  background-color: var(--sig-ink);
+  opacity: 0.06;
+  transform: translate(-50%, -50%);
+  mask-image: url("watermark.svg");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  pointer-events: none;
+}
+
+/* Center the sign-up column content (heading, form, socials) like the source */
+body.sig-sauer-template footer .section:has(.sign-up-form) h1,
+body.sig-sauer-template footer .section:has(.sign-up-form) h2,
+body.sig-sauer-template footer .section:has(.sign-up-form) h3 {
+  text-align: center;
+}
+
+body.sig-sauer-template footer .section:has(.sign-up-form) .sign-up-form-fields {
+  max-width: none;
 }
 
 /* Sign-up form */
@@ -542,4 +586,35 @@ body.sig-sauer-template footer .sign-up-form-fields button {
 body.sig-sauer-template footer .sign-up-form-fields button:hover {
   background: var(--sig-accent);
   color: var(--sig-black);
+}
+
+/* Desktop footer: menu (left) | sign-up + socials (right), like the source. */
+@media (width >= 900px) {
+  body.sig-sauer-template footer .footer-content {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    column-gap: 64px;
+  }
+
+  /* Menu column (logo + link groups) spans the sign-up + socials rows */
+  body.sig-sauer-template footer .footer-content
+    > .section:not(:has(.sign-up-form), .socials, .section-legal, .section-copyright) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  body.sig-sauer-template footer .footer-content .section:has(.sign-up-form) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  body.sig-sauer-template footer .footer-content .socials {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  body.sig-sauer-template footer .footer-content .section-legal,
+  body.sig-sauer-template footer .footer-content .section-copyright {
+    grid-column: 1 / -1;
+  }
 }

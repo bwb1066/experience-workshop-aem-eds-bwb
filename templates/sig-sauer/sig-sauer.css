@@ -275,11 +275,6 @@ body.sig-sauer-template header {
   border-bottom: 1px solid var(--sig-line);
 }
 
-/* Header is position:fixed — offset the page content below it. */
-body.sig-sauer-template main {
-  padding-top: var(--header-height, 64px);
-}
-
 body.sig-sauer-template header a {
   color: var(--sig-ink);
 }
@@ -438,6 +433,11 @@ body.sig-sauer-template header .sig-icon:hover {
     max-width: none;
     padding: 0 32px;
     gap: 28px;
+  }
+
+  /* Shift the nav links right, away from the logo */
+  body.sig-sauer-template header .main-nav-section {
+    padding-left: 160px;
   }
 }
 

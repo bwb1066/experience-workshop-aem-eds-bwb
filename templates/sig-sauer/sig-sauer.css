@@ -53,30 +53,71 @@ body.sig-sauer-template main p {
   line-height: 1.6;
 }
 
-/* Hero — text-driven, full-bleed black */
-body.sig-sauer-template .hero {
-  min-height: 82vh;
-  display: grid;
-  align-content: center;
-  gap: 1.5rem;
-  text-align: center;
-  background:
-    radial-gradient(120% 80% at 50% 0%, rgb(255 255 255 / 6%), transparent 60%),
-    var(--sig-black);
+/* Hero — the base block handles the image + overlay layout; we only theme it.
+   Make image heroes full-bleed (those have a .hero-background; the recall band
+   is an image-less hero, so it keeps the normal container width). */
+body.sig-sauer-template main .section:has(.hero-background) {
+  padding: 0;
 }
-body.sig-sauer-template .hero h1 { text-shadow: 0 2px 40px rgb(0 0 0 / 60%); }
 
-body.sig-sauer-template .hero p:first-of-type {
-  color: var(--sig-ink);
-  font-size: clamp(1rem, 2vw, 1.4rem);
-  letter-spacing: 0.35em;
+body.sig-sauer-template main .section:has(.hero-background) > div {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+body.sig-sauer-template .hero {
+  --min-height: 640px;
+}
+
+/* Eyebrow (authored as h3, e.g. NOW AVAILABLE) */
+body.sig-sauer-template .hero-foreground h3 {
+  margin: 0 0 10px;
+  font-family: var(--sig-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+/* Headline (authored as h2, e.g. P211-GTO QUICKSILVER) */
+body.sig-sauer-template .hero-foreground h2 {
+  margin: 0;
+  font-family: var(--sig-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+/* Short yellow rule under the headline */
+body.sig-sauer-template .hero-foreground h2::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin-top: 18px;
+  background: var(--sig-accent);
+}
+
+/* Hide empty sections (e.g. the trailing metadata-only section, which renders
+   as an empty styled band once its metadata is emitted into <head>). */
+body.sig-sauer-template main .section:empty {
+  display: none;
+}
+
+body.sig-sauer-template .hero .fg-text p {
+  font-family: var(--sig-display);
 }
 
 /* Recall notice band — authored as an image-less hero; render as a full-width
    yellow band with centered dark text (overrides the dark hero styling). */
 body.sig-sauer-template main .section:has(.hero br) {
-  padding-block: 34px;
+  display: grid;
+  align-content: center;
+  min-height: 130px;
+  padding-block: 8px;
   background: var(--sig-accent);
 }
 
@@ -93,6 +134,7 @@ body.sig-sauer-template main .section:has(.hero br) .hero {
 body.sig-sauer-template main .section:has(.hero br) .hero-foreground {
   display: block;
   min-height: 0;
+  padding: 0;
 }
 
 body.sig-sauer-template main .section:has(.hero br) .hero * {
@@ -106,7 +148,7 @@ body.sig-sauer-template main .section:has(.hero br) .hero p {
   color: #10121a;
   font-family: var(--sig-display);
   font-size: 15px;
-  line-height: 2;
+  line-height: 1.55;
   letter-spacing: normal;
   text-transform: none;
 }

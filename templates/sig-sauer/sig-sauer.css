@@ -379,7 +379,7 @@ body.sig-sauer-template footer .footer-content {
 /* Link menu — group headings authored as bold links (Shop/Defense/…), each with
    a sub-list. Flow the groups into columns; render headings as headings, not the
    yellow .btn that ak.js turns bold links into. */
-body.sig-sauer-template footer .footer-content .default-content > ul {
+body.sig-sauer-template footer .footer-content .section:has(.btn) .default-content > ul {
   column-count: 3;
   column-gap: 40px;
   margin: 0;
@@ -387,12 +387,12 @@ body.sig-sauer-template footer .footer-content .default-content > ul {
   list-style: none;
 }
 
-body.sig-sauer-template footer .footer-content .default-content > ul > li {
+body.sig-sauer-template footer .footer-content .section:has(.btn) .default-content > ul > li {
   margin-bottom: 28px;
   break-inside: avoid;
 }
 
-body.sig-sauer-template footer .footer-content .default-content > ul > li > p {
+body.sig-sauer-template footer .footer-content .section:has(.btn) .default-content > ul > li > p {
   margin: 0 0 14px;
 }
 
@@ -415,22 +415,22 @@ body.sig-sauer-template footer .btn:hover {
   color: var(--sig-accent);
 }
 
-body.sig-sauer-template footer .footer-content .default-content ul ul {
+body.sig-sauer-template footer .footer-content .section:has(.btn) .default-content ul ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-body.sig-sauer-template footer .footer-content .default-content ul ul li {
+body.sig-sauer-template footer .footer-content .section:has(.btn) .default-content ul ul li {
   margin: 9px 0;
 }
 
-body.sig-sauer-template footer .footer-content .default-content ul ul a {
+body.sig-sauer-template footer .footer-content .section:has(.btn) .default-content ul ul a {
   font-size: 14px;
   color: var(--sig-muted);
 }
 
-body.sig-sauer-template footer .footer-content .default-content ul ul a:hover {
+body.sig-sauer-template footer .footer-content .section:has(.btn) .default-content ul ul a:hover {
   color: var(--sig-ink);
 }
 
@@ -564,7 +564,8 @@ body.sig-sauer-template footer .sign-up-form-fields {
 body.sig-sauer-template footer .sign-up-form-fields input {
   border: 1px solid var(--sig-line);
   border-radius: 2px;
-  background: #1c1c1c;
+  background: rgb(255 255 255 / 7%);
+  backdrop-filter: blur(10px);
   color: var(--sig-ink);
 }
 
@@ -617,4 +618,36 @@ body.sig-sauer-template footer .sign-up-form-fields button:hover {
   body.sig-sauer-template footer .footer-content .section-copyright {
     grid-column: 1 / -1;
   }
+}
+
+/* Bottom bar — legal links on one row, copyright left-aligned */
+body.sig-sauer-template footer .section-legal {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--sig-line);
+}
+
+body.sig-sauer-template footer .section-legal ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.sig-sauer-template footer .section-legal a {
+  font-size: 13px;
+  color: var(--sig-muted);
+}
+
+body.sig-sauer-template footer .section-copyright {
+  margin-top: 20px;
+  text-align: left;
+}
+
+body.sig-sauer-template footer .section-copyright p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--sig-muted);
 }

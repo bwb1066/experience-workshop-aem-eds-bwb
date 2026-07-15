@@ -211,6 +211,17 @@ body.sig-sauer-template header .brand-section a:hover .brand-text {
   color: var(--sig-accent);
 }
 
+/* Brand logo image (when the nav uses a logo instead of the wordmark) */
+body.sig-sauer-template header .brand-section picture {
+  display: flex;
+  align-items: center;
+}
+
+body.sig-sauer-template header .brand-section img {
+  width: auto;
+  height: 34px;
+}
+
 body.sig-sauer-template header .main-nav-list {
   align-items: center;
 }

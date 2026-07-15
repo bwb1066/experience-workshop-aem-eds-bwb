@@ -140,8 +140,9 @@ function decorateNavItem(li) {
 function decorateBrandSection(section) {
   section.classList.add('brand-section');
   const brandLink = section.querySelector('a');
-  // Wrap the brand's text label. Works whether or not the link has a leading
-  // icon (icon + text, or text-only for wordmark brands like SIG SAUER).
+  // A brand may be a logo image with no link, or a link with an icon + text, or
+  // text only (wordmark). Only wrap a text label when there's a link with text.
+  if (!brandLink) return;
   const textNode = [...brandLink.childNodes]
     .find((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
   const span = document.createElement('span');

@@ -369,6 +369,70 @@ body.sig-sauer-template footer strong {
   letter-spacing: 0.06em;
 }
 
+body.sig-sauer-template footer .footer-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 56px 32px;
+}
+
+/* Link menu — group headings authored as bold links (Shop/Defense/…), each with
+   a sub-list. Flow the groups into columns; render headings as headings, not the
+   yellow .btn that ak.js turns bold links into. */
+body.sig-sauer-template footer .footer-content .default-content > ul {
+  column-count: 4;
+  column-gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.sig-sauer-template footer .footer-content .default-content > ul > li {
+  margin-bottom: 28px;
+  break-inside: avoid;
+}
+
+body.sig-sauer-template footer .footer-content .default-content > ul > li > p {
+  margin: 0 0 14px;
+}
+
+/* Reset the auto-generated button back to a plain section heading */
+body.sig-sauer-template footer .btn {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--sig-ink);
+  font-family: var(--sig-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+body.sig-sauer-template footer .btn:hover {
+  background: none;
+  color: var(--sig-accent);
+}
+
+body.sig-sauer-template footer .footer-content .default-content ul ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.sig-sauer-template footer .footer-content .default-content ul ul li {
+  margin: 9px 0;
+}
+
+body.sig-sauer-template footer .footer-content .default-content ul ul a {
+  font-size: 14px;
+  color: var(--sig-muted);
+}
+
+body.sig-sauer-template footer .footer-content .default-content ul ul a:hover {
+  color: var(--sig-ink);
+}
+
 /* Socials row — authored as plain links in a section styled `socials`; each link
    is turned into its icon by matching the URL (no per-link classes needed). The
    icon is a CSS mask filled with the link color, so it's white and hovers yellow. */

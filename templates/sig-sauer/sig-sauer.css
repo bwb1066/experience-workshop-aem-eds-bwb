@@ -637,6 +637,7 @@ body.sig-sauer-template footer .section-legal ul {
 }
 
 body.sig-sauer-template footer .section-legal a {
+  font-family: var(--sig-display);
   font-size: 13px;
   color: var(--sig-muted);
 }
@@ -648,6 +649,7 @@ body.sig-sauer-template footer .section-copyright {
 
 body.sig-sauer-template footer .section-copyright p {
   margin: 0;
+  font-family: var(--sig-display);
   font-size: 13px;
   color: var(--sig-muted);
 }

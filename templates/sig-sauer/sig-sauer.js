@@ -56,6 +56,25 @@ async function injectUtils() {
   content.append(utils);
 }
 
+/** Recolor the brand logo image to a solid color via a CSS mask, so it can be
+ *  forced white and hover the theme yellow (a plain filter can't hit an exact
+ *  hex). No-op for text/wordmark brands (no image). */
+async function recolorLogo() {
+  const brand = await whenReady('header .brand-section');
+  const img = brand && brand.querySelector('img');
+  if (!img) return;
+  const src = img.currentSrc || img.src;
+  const ratio = img.naturalWidth && img.naturalHeight
+    ? img.naturalWidth / img.naturalHeight
+    : 4;
+  const logo = document.createElement('span');
+  logo.className = 'sig-logo';
+  logo.style.width = `${Math.round(34 * ratio)}px`;
+  logo.style.webkitMaskImage = `url("${src}")`;
+  logo.style.maskImage = `url("${src}")`;
+  (img.closest('picture') || img).replaceWith(logo);
+}
+
 export default function init() {
   // Point the favicon at SIG's icon (co-located with this template). Resolved
   // against the module URL so it works on any branch/origin. Overrides the
@@ -69,4 +88,5 @@ export default function init() {
   document.head.appendChild(link);
 
   injectUtils();
+  recolorLogo();
 }

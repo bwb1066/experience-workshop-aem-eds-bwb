@@ -222,6 +222,21 @@ body.sig-sauer-template header .brand-section img {
   height: 34px;
 }
 
+/* Logo recolored via mask (sig-sauer.js) — forced white, theme yellow on hover */
+body.sig-sauer-template header .sig-logo {
+  display: block;
+  height: 34px;
+  background-color: var(--sig-ink);
+  transition: background-color 0.15s ease;
+  mask-repeat: no-repeat;
+  mask-position: left center;
+  mask-size: contain;
+}
+
+body.sig-sauer-template header .brand-section:hover .sig-logo {
+  background-color: var(--sig-accent);
+}
+
 body.sig-sauer-template header .main-nav-list {
   align-items: center;
 }

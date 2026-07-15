@@ -371,7 +371,7 @@ body.sig-sauer-template footer strong {
 }
 
 body.sig-sauer-template footer .footer-content {
-  max-width: 1280px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 56px 32px;
 }
@@ -620,20 +620,37 @@ body.sig-sauer-template footer .sign-up-form-fields button:hover {
   }
 }
 
-/* Bottom bar — legal links on one row, copyright left-aligned */
+/* Bottom bar. The base makes these sections flex + justify-content:end (pushing
+   content right); force block/left so the legal links and copyright sit left. */
+body.sig-sauer-template footer .section-legal,
+body.sig-sauer-template footer .section-copyright,
+body.sig-sauer-template footer .section-legal .default-content,
+body.sig-sauer-template footer .section-copyright .default-content {
+  display: block;
+  max-width: none;
+  margin-inline: 0;
+  text-align: left;
+}
+
 body.sig-sauer-template footer .section-legal {
   margin-top: 24px;
   padding-top: 24px;
   border-top: 1px solid var(--sig-line);
 }
 
+/* One line, left-aligned */
 body.sig-sauer-template footer .section-legal ul {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px 24px;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 20px;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+body.sig-sauer-template footer .section-legal li {
+  white-space: nowrap;
 }
 
 body.sig-sauer-template footer .section-legal a {
@@ -648,16 +665,14 @@ body.sig-sauer-template footer .section-legal a:hover {
   color: var(--sig-accent);
 }
 
-body.sig-sauer-template footer .section-copyright,
-body.sig-sauer-template footer .section-copyright .default-content,
-body.sig-sauer-template footer .section-copyright p {
-  margin-inline: 0;
-  text-align: left;
+body.sig-sauer-template footer .section-copyright {
+  margin-top: 20px;
 }
 
 body.sig-sauer-template footer .section-copyright p {
-  margin: 20px 0 0;
+  margin: 0;
   font-family: var(--sig-display);
   font-size: 13px;
   color: var(--sig-muted);
+  text-align: left;
 }

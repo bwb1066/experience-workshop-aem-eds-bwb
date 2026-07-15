@@ -496,14 +496,24 @@ body.sig-sauer-template footer .socials a[href$="/social"] {
   mask-image: url("/img/icons/sig.svg");
 }
 
-/* Sezzle — wordmark (second row); not masked */
+/* Sezzle — colored mark + wordmark (second row); not masked */
 body.sig-sauer-template footer .socials a[href*="sezzle"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--sig-display);
   font-size: 1.7rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   text-transform: lowercase;
   color: var(--sig-ink);
+}
+
+body.sig-sauer-template footer .socials a[href*="sezzle"]::before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  background: url("sezzle-mark.svg") no-repeat center / contain;
 }
 
 /* Footer logo (SIG SAUER / NEVER SETTLE) — in the menu section, forced white */
@@ -536,19 +546,27 @@ body.sig-sauer-template footer .section:has(.sign-up-form)::before {
   width: 620px;
   height: 620px;
   background-color: var(--sig-ink);
-  opacity: 0.06;
+  opacity: 0.09;
   transform: translate(-50%, -50%);
-  mask-image: url("watermark.svg");
+  mask-image: url("watermark.svg"), linear-gradient(115deg, #000 10%, transparent 78%);
   mask-repeat: no-repeat;
   mask-position: center;
-  mask-size: contain;
+  mask-size: contain, 100% 100%;
+  mask-composite: intersect;
   pointer-events: none;
 }
 
-/* Center the sign-up column content (heading, form, socials) like the source */
+/* Center the sign-up column content; headings in the Stratum 2 display face,
+   one line, like the source */
 body.sig-sauer-template footer .section:has(.sign-up-form) h1,
 body.sig-sauer-template footer .section:has(.sign-up-form) h2,
 body.sig-sauer-template footer .section:has(.sign-up-form) h3 {
+  font-family: var(--sig-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
   text-align: center;
 }
 
@@ -556,9 +574,18 @@ body.sig-sauer-template footer .section:has(.sign-up-form) .sign-up-form-fields 
   max-width: none;
 }
 
+/* Finer legal print + a gap above it (between the button and the copy) */
+body.sig-sauer-template footer .section:has(.sign-up-form) p {
+  margin-top: 20px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--sig-muted);
+}
+
 /* Sign-up form */
 body.sig-sauer-template footer .sign-up-form-fields {
   max-width: 520px;
+  gap: 16px;
 }
 
 body.sig-sauer-template footer .sign-up-form-fields input {
@@ -574,6 +601,7 @@ body.sig-sauer-template footer .sign-up-form-fields input::placeholder {
 }
 
 body.sig-sauer-template footer .sign-up-form-fields button {
+  margin-top: 8px;
   border: 2px solid var(--sig-accent);
   background: transparent;
   color: var(--sig-accent);
@@ -604,14 +632,19 @@ body.sig-sauer-template footer .sign-up-form-fields button:hover {
     grid-row: 1 / span 2;
   }
 
+  /* Fine grey vertical divider down the left of the right column */
   body.sig-sauer-template footer .footer-content .section:has(.sign-up-form) {
     grid-column: 2;
     grid-row: 1;
+    padding-left: 48px;
+    border-left: 1px solid var(--sig-line);
   }
 
   body.sig-sauer-template footer .footer-content .socials {
     grid-column: 2;
     grid-row: 2;
+    padding-left: 48px;
+    border-left: 1px solid var(--sig-line);
   }
 
   body.sig-sauer-template footer .footer-content .section-legal,

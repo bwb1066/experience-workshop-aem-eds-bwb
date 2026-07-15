@@ -15,7 +15,7 @@ body.sig-sauer-template {
   --sig-ink: #fff;
   --sig-muted: #9a9a9a;
   --sig-line: rgb(255 255 255 / 14%);
-  --sig-accent: #eeaf03; /* SIG yellow (rgb 238 175 0) */
+  --sig-accent: #eeaf00; /* SIG yellow — rgb(238, 175, 0) */
   --sig-max: 1200px;
   --sig-display: 'stratum-2-web', 'Helvetica Neue', helvetica, arial, sans-serif;
 
@@ -243,11 +243,12 @@ body.sig-sauer-template header .main-nav-list {
 }
 
 /* Lock every nav item to the bar height on one line so a stray sub-list or a
-   wrapping label can't stagger the row. */
+   wrapping label can't stagger the row. Inline flow (not flex) so an item with
+   several links + a separator (e.g. "Academy | SEC") keeps its spacing. */
 body.sig-sauer-template header .main-nav-item {
-  display: flex;
-  align-items: center;
   height: var(--header-height, 64px);
+  line-height: var(--header-height, 64px);
+  white-space: nowrap;
   overflow: hidden;
 }
 
@@ -256,14 +257,11 @@ body.sig-sauer-template header .main-nav-item ul {
 }
 
 body.sig-sauer-template header .main-nav-section a {
-  display: block;
   font-family: var(--sig-display);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  line-height: var(--header-height, 64px);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  white-space: nowrap;
 }
 
 body.sig-sauer-template header .main-nav-section a:hover {
@@ -272,6 +270,8 @@ body.sig-sauer-template header .main-nav-section a:hover {
 
 /* SHOP — yellow pill */
 body.sig-sauer-template header .main-nav-section a[href$="/shop"] {
+  display: inline-block;
+  vertical-align: middle;
   padding: 8px 16px;
   border-radius: 3px;
   line-height: 1;

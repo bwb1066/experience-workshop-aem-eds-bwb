@@ -70,6 +70,11 @@ body.sig-sauer-template .hero {
   --min-height: 640px;
 }
 
+/* Video hero — fills from the nav down to just below the fold */
+body.sig-sauer-template .video-hero {
+  --min-height: calc(100vh - var(--header-height, 64px));
+}
+
 /* Primary (first) hero — taller so the image runs just below the fold */
 body.sig-sauer-template main > .section:first-child .hero {
   --min-height: 896px;

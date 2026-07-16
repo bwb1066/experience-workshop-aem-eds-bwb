@@ -1,0 +1,12 @@
+/* Layout is inherited from the hero block (the `hero` class is added in JS). */
+.video-hero {
+  position: relative;
+}
+
+.video-hero .hero-background video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

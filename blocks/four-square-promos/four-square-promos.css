@@ -73,8 +73,9 @@
 .four-square-promos .promo-sub {
   margin: 0;
   max-width: 32ch;
+  color: #fff;
   font-family: var(--fsp-display);
-  font-size: 1.1rem;
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
   line-height: 1.4;
   text-shadow: 0 1px 8px rgb(0 0 0 / 55%);
 }

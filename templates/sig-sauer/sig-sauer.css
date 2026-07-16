@@ -101,7 +101,7 @@ body.sig-sauer-template main .section:has(.drill-hero) > div {
 }
 
 body.sig-sauer-template .hero {
-  --min-height: 640px;
+  --min-height: 780px;
 }
 
 /* Video hero — fills from the nav down to just below the fold */
@@ -125,6 +125,44 @@ body.sig-sauer-template main > .section:first-child .fg-text {
   left: calc(72px + 10%);
   bottom: calc(90px + 10%);
   max-width: 620px;
+}
+
+/* Primary hero on mobile: stack the image on top and the copy below, instead of
+   the lower-left overlay (which crops to the dark side of the image and lets the
+   copy overflow). */
+@media (width < 900px) {
+  body.sig-sauer-template main > .section:first-child .hero {
+    --min-height: auto;
+  }
+
+  body.sig-sauer-template main > .section:first-child .hero-background {
+    position: relative;
+    height: 66vw;
+    min-height: 300px;
+    max-height: 440px;
+  }
+
+  body.sig-sauer-template main > .section:first-child .hero-background picture {
+    position: absolute;
+    inset: 0;
+  }
+
+  body.sig-sauer-template main > .section:first-child .hero-background img {
+    object-position: center;
+  }
+
+  body.sig-sauer-template main > .section:first-child .hero-foreground {
+    display: block;
+    min-height: 0;
+    padding: 0;
+    background: none;
+  }
+
+  body.sig-sauer-template main > .section:first-child .fg-text {
+    position: static;
+    max-width: none;
+    padding: 28px 24px 40px;
+  }
 }
 
 /* Eyebrow (authored as h3, e.g. NOW AVAILABLE) */

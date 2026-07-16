@@ -122,8 +122,8 @@ body.sig-sauer-template main > .section:first-child .hero-foreground {
 
 body.sig-sauer-template main > .section:first-child .fg-text {
   position: absolute;
-  left: calc(72px + 10%);
-  bottom: calc(90px + 10%);
+  left: calc(28px + 4%);
+  top: calc(215px + 23%);
   max-width: 620px;
 }
 

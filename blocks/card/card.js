@@ -9,7 +9,9 @@ export default function init(el) {
       picDiv.className = 'card-picture-container';
       picDiv.append(pic);
       inner.insertAdjacentElement('afterbegin', picDiv);
-      picPara.remove();
+      // Only drop the paragraph if it held nothing but the picture — otherwise
+      // it still carries the label (e.g. an icon + "Pistols" in one paragraph).
+      if (!picPara.textContent.trim()) picPara.remove();
     }
   }
   // Decorate content

@@ -184,37 +184,75 @@ body.sig-sauer-template main .section:has(.hero br) .hero a:hover {
   text-decoration: underline;
 }
 
-/* Category cards */
-body.sig-sauer-template .card {
-  background: #141414;
-  border: 1px solid var(--sig-line);
-  padding: 28px 24px;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+/* Featured Categories — a grid of white line-art icons with an underlined
+   label beneath each (no card box). Quiet support cards are styled separately. */
+body.sig-sauer-template main .section:has(.card:not(.quiet)) h2 {
+  margin-bottom: 56px;
+  font-size: 1.9rem;
+  text-align: center;
 }
 
-body.sig-sauer-template .card:hover {
-  border-color: var(--sig-ink);
-  transform: translateY(-3px);
+body.sig-sauer-template main .block-content:has(> .card:not(.quiet)) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 72px 48px;
+  max-width: 1700px;
+  margin: 0 auto;
 }
 
-body.sig-sauer-template .card strong {
+body.sig-sauer-template .card:not(.quiet),
+body.sig-sauer-template .card:not(.quiet) .card-inner {
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  text-align: center;
+}
+
+/* Cards are authored two ways — a linked icon+label (a > picture + text) or an
+   icon + label paragraph. Lay both out as a centered icon-over-label column. */
+body.sig-sauer-template .card:not(.quiet) .card-content-container,
+body.sig-sauer-template .card:not(.quiet) .card-content-container a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+body.sig-sauer-template .card:not(.quiet) img {
   display: block;
+  width: auto;
+  height: 150px;
+  transition: transform 0.2s ease;
+}
+
+/* Scale the icon up 8% on hover */
+body.sig-sauer-template .card:not(.quiet) a:hover img,
+body.sig-sauer-template .card:not(.quiet):hover img {
+  transform: scale(1.08);
+}
+
+/* Label — underline it with the theme yellow (it's a bare text node in linked
+   cards, so use text-decoration rather than a border). */
+body.sig-sauer-template .card:not(.quiet) .card-content-container a,
+body.sig-sauer-template .card:not(.quiet) .card-content-container p {
+  margin: 0;
   font-family: var(--sig-display);
-  text-transform: uppercase;
+  font-size: 15px;
   font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--sig-ink);
-  margin-bottom: 6px;
+  text-decoration: underline;
+  text-decoration-color: var(--sig-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
 }
 
-body.sig-sauer-template .card strong::after {
-  content: '';
-  display: block;
-  width: 32px;
-  height: 3px;
-  margin-top: 10px;
-  background: var(--sig-accent);
+@media (width >= 900px) {
+  body.sig-sauer-template main .block-content:has(> .card:not(.quiet)) {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 
 /* Buttons — palette: SIG yellow #eeaf03, white, black.

@@ -76,6 +76,16 @@ body.sig-sauer-template main .section:has(.trusted-worldwide) > div {
   margin: 0;
 }
 
+/* 4 Square Promos — full page width (the block adds its own 15px white gutter). */
+body.sig-sauer-template main .section:has(.four-square-promos) {
+  padding: 0;
+}
+
+body.sig-sauer-template main .section:has(.four-square-promos) > div {
+  max-width: none;
+  margin: 0;
+}
+
 body.sig-sauer-template .hero {
   --min-height: 640px;
 }

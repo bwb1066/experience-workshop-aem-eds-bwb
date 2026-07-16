@@ -1,0 +1,119 @@
+/*
+ * 4 Square Promos — a 2x2 grid of image tiles with overlaid heading, subhead,
+ * and outlined CTA buttons. 15px white gutters between tiles and around the
+ * grid. Accent/display font are themeable (fall back to SIG values).
+ */
+
+.four-square-promos {
+  --fsp-accent: var(--sig-accent, #eeaf03);
+  --fsp-display: var(--sig-display, "Helvetica Neue", helvetica, arial, sans-serif);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  padding: 15px;
+  background: #fff;
+}
+
+.four-square-promos .promo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: 300px;
+  padding: 40px 28px;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+}
+
+/* Background image + a scrim so the overlay text stays legible. */
+.four-square-promos .promo-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.four-square-promos .promo-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.four-square-promos .promo-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 45%) 0%, rgb(0 0 0 / 15%) 45%, rgb(0 0 0 / 45%) 100%);
+}
+
+.four-square-promos .promo-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.four-square-promos .promo-title {
+  margin: 0;
+  font-family: var(--fsp-display);
+  font-size: clamp(1.8rem, 3.4vw, 3rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 45%);
+}
+
+.four-square-promos .promo-sub {
+  margin: 0;
+  max-width: 32ch;
+  font-family: var(--fsp-display);
+  font-size: 1.1rem;
+  line-height: 1.4;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 55%);
+}
+
+.four-square-promos .promo-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.four-square-promos .promo-btn {
+  display: inline-block;
+  padding: 12px 26px;
+  border: 2px solid var(--fsp-accent);
+  background: transparent;
+  color: var(--fsp-accent);
+  font-family: var(--fsp-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.four-square-promos .promo-btn:hover {
+  background: var(--fsp-accent);
+  color: #0a0a0a;
+}
+
+@media (width >= 700px) {
+  .four-square-promos {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .four-square-promos .promo {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+}

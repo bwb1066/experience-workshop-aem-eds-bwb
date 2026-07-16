@@ -27,7 +27,16 @@ function textAfter(container, start) {
 }
 
 export default function decorate(block) {
-  const rows = [...block.children];
+  // A heading-only row (no image) is the block title, not a tab.
+  let heading = null;
+  const rows = [...block.children].filter((row) => {
+    const h = row.querySelector('h1, h2, h3, h4, h5, h6');
+    if (h && !row.querySelector('picture, img')) {
+      heading = h;
+      return false;
+    }
+    return true;
+  });
 
   const stage = document.createElement('div');
   stage.className = 'tw-stage';
@@ -112,13 +121,20 @@ export default function decorate(block) {
     head.addEventListener('click', () => select(i));
   });
 
-  block.textContent = '';
   const right = document.createElement('div');
   right.className = 'tw-right';
   right.append(tabbar, details);
   const layout = document.createElement('div');
   layout.className = 'tw-layout';
   layout.append(stage, right);
+
+  block.textContent = '';
+  if (heading) {
+    const title = document.createElement('div');
+    title.className = 'tw-title';
+    title.append(heading);
+    block.append(title);
+  }
   block.append(layout);
 
   select(0);

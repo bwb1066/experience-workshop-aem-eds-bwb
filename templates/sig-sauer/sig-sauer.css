@@ -437,24 +437,20 @@ body.sig-sauer-template header .brand-section picture {
   align-items: center;
 }
 
+/* The logo art is black (no fill) — recolor it white with a filter so it shows
+   on the dark bar. A filter (unlike a CSS mask) has no cross-origin restriction,
+   so it works everywhere, including DA's authoring canvas where the media is
+   served from another origin (a masked recolor rendered empty there → the logo
+   vanished). Theme yellow on hover. */
 body.sig-sauer-template header .brand-section img {
   width: auto;
   height: 34px;
+  filter: brightness(0) invert(1);
+  transition: filter 0.15s ease;
 }
 
-/* Logo recolored via mask (sig-sauer.js) — forced white, theme yellow on hover */
-body.sig-sauer-template header .sig-logo {
-  display: block;
-  height: 34px;
-  background-color: var(--sig-ink);
-  transition: background-color 0.15s ease;
-  mask-repeat: no-repeat;
-  mask-position: left center;
-  mask-size: contain;
-}
-
-body.sig-sauer-template header .brand-section:hover .sig-logo {
-  background-color: var(--sig-accent);
+body.sig-sauer-template header .brand-section:hover img {
+  filter: brightness(0) saturate(100%) invert(72%) sepia(64%) saturate(1200%) hue-rotate(1deg) brightness(98%) contrast(92%);
 }
 
 body.sig-sauer-template header .main-nav-list {

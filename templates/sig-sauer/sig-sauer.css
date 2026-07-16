@@ -86,6 +86,20 @@ body.sig-sauer-template main .section:has(.four-square-promos) > div {
   margin: 0;
 }
 
+/* Full-bleed heroes: infinite-guarantee, support, drill. */
+body.sig-sauer-template main .section:has(.infinite-guarantee-hero),
+body.sig-sauer-template main .section:has(.support-hero),
+body.sig-sauer-template main .section:has(.drill-hero) {
+  padding: 0;
+}
+
+body.sig-sauer-template main .section:has(.infinite-guarantee-hero) > div,
+body.sig-sauer-template main .section:has(.support-hero) > div,
+body.sig-sauer-template main .section:has(.drill-hero) > div {
+  max-width: none;
+  margin: 0;
+}
+
 body.sig-sauer-template .hero {
   --min-height: 640px;
 }

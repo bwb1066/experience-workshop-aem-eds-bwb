@@ -346,7 +346,7 @@ body.sig-sauer-template header .main-nav-item ul {
 
 body.sig-sauer-template header .main-nav-section a {
   font-family: var(--sig-display);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -437,7 +437,7 @@ body.sig-sauer-template header .sig-icon:hover {
 
   /* Shift the nav links right, away from the logo */
   body.sig-sauer-template header .main-nav-section {
-    padding-left: 160px;
+    padding-left: 110px;
   }
 }
 

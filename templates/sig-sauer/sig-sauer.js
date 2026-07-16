@@ -98,9 +98,20 @@ async function injectHamburger() {
  *  hex). No-op for text/wordmark brands (no image). */
 async function recolorLogo() {
   const brand = await whenReady('header .brand-section');
-  const img = brand && brand.querySelector('img');
+  if (!brand || brand.querySelector('.sig-logo')) return; // idempotent
+  const img = brand.querySelector('img');
   if (!img) return;
   const src = img.currentSrc || img.src;
+  if (!src) return;
+  // A CSS mask sourced from a cross-origin image is blocked and renders empty,
+  // which makes the logo vanish (e.g. in DA's authoring canvas, where media is
+  // served from a different origin than the canvas). Only recolor when the
+  // image is same-origin; otherwise leave the original logo visible.
+  try {
+    if (new URL(src, window.location.href).origin !== window.location.origin) return;
+  } catch {
+    return;
+  }
   const ratio = img.naturalWidth && img.naturalHeight
     ? img.naturalWidth / img.naturalHeight
     : 4;

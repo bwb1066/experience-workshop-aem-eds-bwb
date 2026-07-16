@@ -70,6 +70,11 @@ body.sig-sauer-template .hero {
   --min-height: 640px;
 }
 
+/* Primary (first) hero — ~30% taller so the image runs just below the fold */
+body.sig-sauer-template main > .section:first-child .hero {
+  --min-height: 830px;
+}
+
 /* Eyebrow (authored as h3, e.g. NOW AVAILABLE) */
 body.sig-sauer-template .hero-foreground h3 {
   margin: 0 0 10px;

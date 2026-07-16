@@ -93,36 +93,6 @@ async function injectHamburger() {
   header.append(btn);
 }
 
-/** Recolor the brand logo image to a solid color via a CSS mask, so it can be
- *  forced white and hover the theme yellow (a plain filter can't hit an exact
- *  hex). No-op for text/wordmark brands (no image). */
-async function recolorLogo() {
-  const brand = await whenReady('header .brand-section');
-  if (!brand || brand.querySelector('.sig-logo')) return; // idempotent
-  const img = brand.querySelector('img');
-  if (!img) return;
-  const src = img.currentSrc || img.src;
-  if (!src) return;
-  // A CSS mask sourced from a cross-origin image is blocked and renders empty,
-  // which makes the logo vanish (e.g. in DA's authoring canvas, where media is
-  // served from a different origin than the canvas). Only recolor when the
-  // image is same-origin; otherwise leave the original logo visible.
-  try {
-    if (new URL(src, window.location.href).origin !== window.location.origin) return;
-  } catch {
-    return;
-  }
-  const ratio = img.naturalWidth && img.naturalHeight
-    ? img.naturalWidth / img.naturalHeight
-    : 4;
-  const logo = document.createElement('span');
-  logo.className = 'sig-logo';
-  logo.style.width = `${Math.round(34 * ratio)}px`;
-  logo.style.webkitMaskImage = `url("${src}")`;
-  logo.style.maskImage = `url("${src}")`;
-  (img.closest('picture') || img).replaceWith(logo);
-}
-
 export default function init() {
   // Point the favicon at SIG's icon (co-located with this template). Resolved
   // against the module URL so it works on any branch/origin. Overrides the
@@ -137,5 +107,4 @@ export default function init() {
 
   injectUtils();
   injectHamburger();
-  recolorLogo();
 }

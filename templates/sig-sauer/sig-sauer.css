@@ -66,6 +66,16 @@ body.sig-sauer-template main .section:has(.hero-background) > div {
   padding: 0;
 }
 
+/* Trusted Worldwide — full-bleed like the heroes. */
+body.sig-sauer-template main .section:has(.trusted-worldwide) {
+  padding: 0;
+}
+
+body.sig-sauer-template main .section:has(.trusted-worldwide) > div {
+  max-width: none;
+  margin: 0;
+}
+
 body.sig-sauer-template .hero {
   --min-height: 640px;
 }
@@ -413,6 +423,14 @@ body.sig-sauer-template header .main-nav-section a {
   letter-spacing: 0.04em;
 }
 
+/* Keep the trigger link inline. The base sets .main-nav-link display:block,
+   which for a two-link item ("Academy | Sec") puts the second link on a clipped
+   second line — inline keeps both links on one row. (Mobile drawer re-blocks
+   it below.) */
+body.sig-sauer-template header .main-nav-link {
+  display: inline;
+}
+
 body.sig-sauer-template header .main-nav-section a:hover {
   color: var(--sig-accent);
 }
@@ -437,6 +455,156 @@ body.sig-sauer-template header .main-nav-section a[href$="/shop"]:hover {
 body.sig-sauer-template header .main-nav-item:has(a[href$="/shop"]) + .main-nav-item {
   padding-left: 24px;
   border-left: 1px solid var(--sig-line);
+}
+
+/* --- Mega menu -------------------------------------------------------------
+   Each top-level nav item carries its dropdown as an inline nested list:
+     li.main-nav-item
+       > p > a.main-nav-link      (trigger)
+       > ul                       (panel)
+         > li                     (a column)
+           > p > a.btn            (column heading — ak.js turned it into a button)
+           > ul > li > a          (links)
+   The panel opens on hover (SIG's behavior) and also stays open when base
+   header.js toggles `.is-open` on click/keyboard — both drive the same styles.
+   Desktop only — mobile collapses the whole nav into the hamburger. */
+@media (width >= 900px) {
+  /* Let the open item's absolutely-positioned panel escape the bar's clip. */
+  body.sig-sauer-template header .main-nav-item:hover,
+  body.sig-sauer-template header .main-nav-item.is-open {
+    overflow: visible;
+  }
+
+  /* Active trigger: paint it yellow while its panel is open. */
+  body.sig-sauer-template header .main-nav-item:hover > p > a.main-nav-link,
+  body.sig-sauer-template header .main-nav-item.is-open > p > a.main-nav-link {
+    color: var(--sig-accent);
+  }
+
+  /* The panel: a full-bleed dark sheet dropping from the bottom of the bar,
+     positioned against <header> (the fixed, full-width ancestor). Groups stack
+     top-to-bottom and wrap into columns (like SIG); `align-content: center`
+     centers the whole column set across the page. The fixed height sets how many
+     columns the groups wrap into. */
+  body.sig-sauer-template header .main-nav-item:hover > ul,
+  body.sig-sauer-template header .main-nav-item.is-open > ul {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    gap: 22px 52px;
+    height: 430px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--header-height, 64px);
+    z-index: 1001;
+    padding: 44px max(32px, 5vw) 52px;
+    line-height: 1.5;
+    white-space: normal;
+    background: #0a0a0a;
+    border-top: 2px solid var(--sig-accent);
+    border-bottom: 2px solid var(--sig-accent);
+    box-shadow: 0 30px 40px rgb(0 0 0 / 55%);
+  }
+
+  /* SIG's angular accents: a 35px yellow wedge at the panel's top-left and a
+     point-symmetric one at the bottom-right (each a bar with one slanted end). */
+  body.sig-sauer-template header .main-nav-item:hover > ul::before,
+  body.sig-sauer-template header .main-nav-item.is-open > ul::before,
+  body.sig-sauer-template header .main-nav-item:hover > ul::after,
+  body.sig-sauer-template header .main-nav-item.is-open > ul::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 35px;
+    background: var(--sig-accent);
+  }
+
+  body.sig-sauer-template header .main-nav-item:hover > ul::before,
+  body.sig-sauer-template header .main-nav-item.is-open > ul::before {
+    top: -2px;
+    left: 0;
+    clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 100%, 0 100%);
+  }
+
+  body.sig-sauer-template header .main-nav-item:hover > ul::after,
+  body.sig-sauer-template header .main-nav-item.is-open > ul::after {
+    right: 0;
+    bottom: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 30px 100%);
+  }
+
+  /* A group/column unit — fixed width so columns are even. Inner styles apply to
+     the panel whether revealed by hover or click; harmless while hidden. */
+  body.sig-sauer-template header .main-nav-item > ul > li {
+    width: 190px;
+    height: auto;
+    line-height: 1.5;
+  }
+
+  /* Split a long list (11+ links, e.g. Pistols) into two sub-columns and widen
+     its group to hold them — keeps any one column from dominating the height. */
+  body.sig-sauer-template header .main-nav-item > ul > li:has(> ul > li:nth-child(11)) {
+    width: 320px;
+  }
+
+  body.sig-sauer-template header .main-nav-item > ul > li > ul:has(> li:nth-child(11)) {
+    column-count: 2;
+    column-gap: 32px;
+  }
+
+  body.sig-sauer-template header .main-nav-item > ul > li > p {
+    margin: 0 0 16px;
+  }
+
+  /* Column heading — reset the ak.js .btn back to a yellow-underlined heading. */
+  body.sig-sauer-template header .main-nav-item > ul .btn {
+    display: inline-block;
+    padding: 0 0 8px;
+    border: 0;
+    border-bottom: 2px solid var(--sig-accent);
+    border-radius: 0;
+    background: none;
+    color: var(--sig-ink);
+    font-family: var(--sig-display);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  body.sig-sauer-template header .main-nav-item > ul .btn:hover {
+    background: none;
+    color: var(--sig-accent);
+  }
+
+  /* Link lists inside the panel. */
+  body.sig-sauer-template header .main-nav-item > ul ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  body.sig-sauer-template header .main-nav-item > ul ul li {
+    height: auto;
+    margin: 10px 0;
+    line-height: 1.3;
+  }
+
+  body.sig-sauer-template header .main-nav-item > ul ul a {
+    font-family: var(--sig-display);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: none;
+    color: var(--sig-muted);
+  }
+
+  body.sig-sauer-template header .main-nav-item > ul ul a:hover {
+    color: var(--sig-accent);
+  }
 }
 
 /* Right-side utilities (search + icons), injected by sig-sauer.js */
@@ -499,6 +667,159 @@ body.sig-sauer-template header .sig-icon:hover {
   /* Shift the nav links right, away from the logo */
   body.sig-sauer-template header .main-nav-section {
     padding-left: 110px;
+  }
+}
+
+/* Hamburger is mobile-only — hidden on desktop (shown in the < 900px block). */
+body.sig-sauer-template header .sig-hamburger {
+  display: none;
+}
+
+/* --- Mobile header / nav (< 900px) -----------------------------------------
+   The base header collapses to the brand row on mobile (max-height + overflow
+   clip the nav + actions rows). SIG's fragment carries no toggle link, so
+   sig-sauer.js injects a hamburger that drives the base `is-mobile-open` state.
+   We lay out the top bar (logo left, compact utilities + hamburger right) and
+   render the nav as a dark drawer with a heading-level accordion. */
+@media (width < 900px) {
+  /* Logo pinned left in the always-visible top bar. */
+  body.sig-sauer-template header .brand-section .default-content {
+    justify-content: flex-start;
+    padding-left: 4px;
+  }
+
+  /* Pull the utilities up into the top bar, left of the hamburger; icons only
+     (search box collapses to its button; drop the store + announce icons). */
+  body.sig-sauer-template header .sig-utils {
+    position: absolute;
+    top: 0;
+    right: 56px;
+    height: var(--header-height, 64px);
+    gap: 18px;
+    z-index: 3;
+  }
+
+  body.sig-sauer-template header .sig-search {
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  body.sig-sauer-template header .sig-search input {
+    display: none;
+  }
+
+  body.sig-sauer-template header .sig-icon[aria-label="Find a store"],
+  body.sig-sauer-template header .sig-icon[aria-label="Announcements"] {
+    display: none;
+  }
+
+  /* Hamburger — top-right of the bar. */
+  body.sig-sauer-template header .sig-hamburger {
+    position: absolute;
+    top: 0;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: var(--header-height, 64px);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--sig-ink);
+    cursor: pointer;
+    z-index: 3;
+  }
+
+  body.sig-sauer-template header .sig-hamburger:hover {
+    color: var(--sig-accent);
+  }
+
+  /* Open drawer scrolls if the nav is tall. */
+  body.sig-sauer-template header.is-mobile-open {
+    overflow-y: auto;
+  }
+
+  /* Keep the (clipped) nav out of layout until the drawer opens — otherwise its
+     grid track still sizes the fixed header and pushes the mobile viewport wide. */
+  body.sig-sauer-template header:not(.is-mobile-open) .main-nav-section {
+    display: none;
+  }
+
+  /* Nav as a vertical list of category rows. */
+  body.sig-sauer-template header .main-nav-section {
+    padding: 8px 0 40px;
+  }
+
+  body.sig-sauer-template header .main-nav-list {
+    display: block;
+  }
+
+  body.sig-sauer-template header .main-nav-item {
+    height: auto;
+    border-bottom: 1px solid var(--sig-line);
+    line-height: normal;
+    white-space: normal;
+    overflow: visible;
+  }
+
+  body.sig-sauer-template header .main-nav-link {
+    display: block;
+    padding: 16px 24px;
+    font-family: var(--sig-display);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  body.sig-sauer-template header .main-nav-item.is-open > p > .main-nav-link {
+    color: var(--sig-accent);
+  }
+
+  /* SHOP is a plain drawer row here, not the desktop pill. */
+  body.sig-sauer-template header .main-nav-section a[href$="/shop"] {
+    display: block;
+    padding: 16px 24px;
+    border-radius: 0;
+    background: none;
+    color: var(--sig-ink);
+  }
+
+  body.sig-sauer-template header .main-nav-item:has(a[href$="/shop"]) + .main-nav-item {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  /* Accordion: reveal the column headings (real category links) when a row is
+     open; hide the deep product lists so the drawer stays manageable. */
+  body.sig-sauer-template header .main-nav-item.is-open > ul {
+    display: block;
+    padding: 4px 0 16px;
+  }
+
+  body.sig-sauer-template header .main-nav-item.is-open > ul ul {
+    display: none;
+  }
+
+  body.sig-sauer-template header .main-nav-item.is-open > ul .btn {
+    display: block;
+    padding: 10px 36px;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--sig-muted);
+    font-family: var(--sig-display);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  body.sig-sauer-template header .main-nav-item.is-open > ul .btn:hover {
+    color: var(--sig-accent);
+    background: none;
   }
 }
 
@@ -720,6 +1041,17 @@ body.sig-sauer-template footer .section:has(.sign-up-form) .sign-up-form-fields 
   max-width: none;
 }
 
+/* On mobile the one-line heading is wider than the viewport (nowrap forces the
+   footer's min-content past device-width and zooms the page out) — let it wrap. */
+@media (width < 900px) {
+  body.sig-sauer-template footer .section:has(.sign-up-form) h1,
+  body.sig-sauer-template footer .section:has(.sign-up-form) h2,
+  body.sig-sauer-template footer .section:has(.sign-up-form) h3 {
+    white-space: normal;
+    font-size: 1.25rem;
+  }
+}
+
 /* Finer legal print + a gap above it (between the button and the copy) */
 body.sig-sauer-template footer .section:has(.sign-up-form) p {
   margin-top: 20px;
@@ -817,12 +1149,14 @@ body.sig-sauer-template footer .section-legal {
   border-top: 1px solid var(--sig-line);
 }
 
-/* One line, left-aligned */
+/* Left-aligned; one line where it fits, wrapping on narrow/mobile widths. A
+   hard `nowrap` here forces the footer's min-content to the full link row, which
+   blows out the mobile layout viewport (zooming the whole page out). */
 body.sig-sauer-template footer .section-legal ul {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 12px 20px;
   margin: 0;
   padding: 0;
   list-style: none;

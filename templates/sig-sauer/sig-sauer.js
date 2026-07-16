@@ -10,6 +10,8 @@ const ICONS = {
   announce: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>',
   cart: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>',
   user: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 1 0-16 0"/><circle cx="12" cy="8" r="4"/></svg>',
+  menu: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
+  close: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
 };
 
 /** Resolve once the selector appears (header loads async, post-LCP). */
@@ -56,6 +58,41 @@ async function injectUtils() {
   content.append(utils);
 }
 
+/** Inject the mobile hamburger. SIG's nav fragment has no `/tools/widgets/toggle`
+ *  link, so the base header never builds a toggle — add one and drive the base
+ *  `is-mobile-open` state ourselves. Hidden on desktop via CSS. */
+async function injectHamburger() {
+  const content = await whenReady('header .header-content');
+  const header = content && content.closest('header');
+  if (!header || header.querySelector('.sig-hamburger')) return;
+
+  const btn = document.createElement('button');
+  btn.className = 'sig-hamburger';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'Menu');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.innerHTML = ICONS.menu;
+
+  btn.addEventListener('click', () => {
+    const open = header.classList.toggle('is-mobile-open');
+    btn.setAttribute('aria-expanded', String(open));
+    btn.innerHTML = open ? ICONS.close : ICONS.menu;
+  });
+
+  // Tapping a top-level category toggles its accordion (base handler), but
+  // tapping a real link inside a submenu should close the whole menu.
+  header.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (link && header.classList.contains('is-mobile-open') && !link.closest('.main-nav-link')) {
+      header.classList.remove('is-mobile-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.innerHTML = ICONS.menu;
+    }
+  });
+
+  header.append(btn);
+}
+
 /** Recolor the brand logo image to a solid color via a CSS mask, so it can be
  *  forced white and hover the theme yellow (a plain filter can't hit an exact
  *  hex). No-op for text/wordmark brands (no image). */
@@ -88,5 +125,6 @@ export default function init() {
   document.head.appendChild(link);
 
   injectUtils();
+  injectHamburger();
   recolorLogo();
 }

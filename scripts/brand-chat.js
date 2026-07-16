@@ -38,6 +38,11 @@ export default async function loadBrandChat() {
     showTrigger: getMetadata('concierge-trigger') !== 'false',
     triggerStyle: getMetadata('concierge-trigger-style') || 'bubble',
     triggerLabel: getMetadata('concierge-trigger-label') || '',
+    // The widget normally derives its base (for loading brand-concierge.css)
+    // from its own <script src> tag — but we load it via dynamic import(), so
+    // no such tag exists and it would fetch the CSS relative to the page (404).
+    // Pass the base explicitly so the widget's stylesheet resolves correctly.
+    widgetBase: DEFAULTS.widget.replace(/[^/]+$/, ''),
   };
 
   try {

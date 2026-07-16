@@ -70,9 +70,9 @@ body.sig-sauer-template .hero {
   --min-height: 640px;
 }
 
-/* Primary (first) hero — ~30% taller so the image runs just below the fold */
+/* Primary (first) hero — taller so the image runs just below the fold */
 body.sig-sauer-template main > .section:first-child .hero {
-  --min-height: 830px;
+  --min-height: 896px;
 }
 
 /* Eyebrow (authored as h3, e.g. NOW AVAILABLE) */

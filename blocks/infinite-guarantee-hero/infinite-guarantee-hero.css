@@ -1,0 +1,98 @@
+/*
+ * Infinite Guarantee Hero — a full-bleed dark banner. Left: logo + heading +
+ * bullets + outlined CTA. Right: a photo filling the cell.
+ */
+
+.infinite-guarantee-hero {
+  background: #0a0a0a;
+  color: #fff;
+}
+
+.infinite-guarantee-hero > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+.infinite-guarantee-hero .ig-logo {
+  padding: 32px 24px 0;
+  text-align: center;
+}
+
+.infinite-guarantee-hero .ig-logo img {
+  width: auto;
+  max-height: 180px;
+}
+
+.infinite-guarantee-hero .ig-text {
+  padding: 24px 24px 40px;
+}
+
+.infinite-guarantee-hero .ig-title {
+  margin: 0 0 20px;
+  font-family: var(--sig-display, "Helvetica Neue", helvetica, arial, sans-serif);
+  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.infinite-guarantee-hero .ig-bullet {
+  margin: 0;
+  font-family: var(--sig-display, "Helvetica Neue", helvetica, arial, sans-serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.infinite-guarantee-hero .ig-more {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 13px 30px;
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  font-family: var(--sig-display, "Helvetica Neue", helvetica, arial, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.infinite-guarantee-hero .ig-more:hover {
+  background: #fff;
+  color: #0a0a0a;
+}
+
+.infinite-guarantee-hero .ig-photo {
+  align-self: stretch;
+  min-height: 220px;
+}
+
+.infinite-guarantee-hero .ig-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (width >= 900px) {
+  .infinite-guarantee-hero > div {
+    grid-template-columns: auto minmax(0, 1fr) 32%;
+  }
+
+  .infinite-guarantee-hero .ig-logo {
+    padding: 48px 8px 48px 56px;
+  }
+
+  .infinite-guarantee-hero .ig-text {
+    padding: 48px 40px;
+  }
+}

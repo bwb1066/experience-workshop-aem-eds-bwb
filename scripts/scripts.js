@@ -1,4 +1,22 @@
-import { loadArea, setConfig } from './ak.js';
+import { loadArea, setConfig, getMetadata, loadStyle } from './ak.js';
+
+/**
+ * Folder-derived client template (workshop container — see CLIENTS.md). Pages
+ * under /<client>/ automatically get templates/<client>/<client>.css + the
+ * body class <client>-template, so authors never need `template` metadata. An
+ * explicit `template` metadata still wins (handled by ak.js loadTemplate).
+ */
+function loadClientTemplate() {
+  if (getMetadata('template')) return;
+  const [client] = window.location.pathname.split('/').filter(Boolean);
+  if (!client) return;
+  const { href } = new URL(`../templates/${client}/${client}.css`, import.meta.url);
+  document.body.classList.add('has-template');
+  loadStyle(href).then(() => {
+    document.body.classList.add(`${client}-template`);
+    document.body.classList.remove('has-template');
+  });
+}
 
 const hostnames = ['authorkit.dev'];
 
@@ -35,6 +53,7 @@ const decorateArea = ({ area = document }) => {
 
 export async function loadPage() {
   setConfig({ hostnames, locales, linkBlocks, components, decorateArea });
+  loadClientTemplate();
   await loadArea();
 }
 await loadPage();

@@ -52,6 +52,32 @@ export async function loadFragment(path) {
 }
 
 /**
+ * The first path segment of the current URL — used as the "client" key in the
+ * workshop container (e.g. /sig-sauer/... -> "sig-sauer"). See CLIENTS.md.
+ * @returns {string} the client segment, or '' at the site root
+ */
+export function clientSegment() {
+  const [seg] = window.location.pathname.split('/').filter(Boolean);
+  return seg || '';
+}
+
+/**
+ * Load the first fragment that resolves from an ordered list of candidate
+ * paths, letting per-client fragments override the shared default.
+ * @param {string[]} paths candidate fragment paths, most specific first
+ * @returns {HTMLElement} the loaded fragment
+ */
+export async function loadFirstFragment(paths) {
+  for (const path of paths.filter(Boolean)) {
+    try {
+      // eslint-disable-next-line no-await-in-loop
+      return await loadFragment(path);
+    } catch { /* try the next candidate */ }
+  }
+  throw Error(`No fragment found (tried: ${paths.filter(Boolean).join(', ')})`);
+}
+
+/**
  *
  * @param {Element}} a the fragment link
  * @returns the element that can be replaced

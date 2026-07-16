@@ -1,0 +1,140 @@
+/*
+ * Trusted Worldwide — a large "stage" image on the left; on the right a
+ * horizontal tab bar over a detail panel (thumbnail, caption, link). Selecting a
+ * tab (active = #333, yellow underline) swaps both the stage image and the
+ * detail. Dark surface; accent is themeable via --tw-accent.
+ */
+
+.trusted-worldwide {
+  --tw-accent: #eeaf03;
+  --tw-ink: #fff;
+  --tw-muted: #9a9a9a;
+  --tw-line: rgb(255 255 255 / 14%);
+  --tw-selected: #333;
+}
+
+/* Centered block title above the tabs. */
+.trusted-worldwide .tw-title {
+  margin: 8px 0;
+  text-align: center;
+}
+
+.trusted-worldwide .tw-title :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  color: var(--tw-ink);
+  font-family: var(--sig-display, inherit);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.trusted-worldwide .tw-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+
+/* Stage — one image visible at a time, filling its (stretched) cell. */
+.trusted-worldwide .tw-stage {
+  position: relative;
+}
+
+.trusted-worldwide .tw-panel {
+  display: none;
+  height: 100%;
+}
+
+.trusted-worldwide .tw-panel.is-active {
+  display: block;
+}
+
+.trusted-worldwide .tw-panel img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  object-fit: cover;
+}
+
+.trusted-worldwide .tw-right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Horizontal tab bar sitting on a full-width accent rule. */
+.trusted-worldwide .tw-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--tw-accent);
+}
+
+.trusted-worldwide .tw-tab-head {
+  flex: 1;
+  margin: 0;
+  padding: 16px 14px;
+  border: 0;
+  background: none;
+  color: var(--tw-ink);
+  font: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+}
+
+.trusted-worldwide .tw-tab-head.is-active {
+  background: var(--tw-selected);
+}
+
+/* Detail panel below the tabs. */
+.trusted-worldwide .tw-details {
+  flex: 1;
+}
+
+.trusted-worldwide .tw-detail {
+  display: none;
+}
+
+.trusted-worldwide .tw-detail.is-active {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.trusted-worldwide .tw-detail img {
+  display: block;
+  width: 100%;
+  margin: 18px 0;
+}
+
+.trusted-worldwide .tw-caption {
+  margin: 0 0 20px;
+  padding: 0 20px;
+  color: var(--tw-ink);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.trusted-worldwide .tw-more {
+  display: inline-block;
+  margin: 0 20px 4px;
+  padding: 12px 24px;
+  background: var(--tw-accent);
+  color: #0a0a0a;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.trusted-worldwide .tw-more:hover {
+  filter: brightness(1.08);
+}
+
+@media (width >= 900px) {
+  .trusted-worldwide .tw-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}

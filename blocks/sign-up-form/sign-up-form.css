@@ -1,0 +1,22 @@
+/* Neutral base layout; per-client themes (e.g. templates/sig-sauer) restyle it. */
+.sign-up-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 460px;
+}
+
+.sign-up-form-fields input {
+  padding: 14px 16px;
+  font: inherit;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+.sign-up-form-fields button {
+  padding: 14px;
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid currentcolor;
+  background: transparent;
+}

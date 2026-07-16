@@ -1,0 +1,13 @@
+/*
+ * Drill Hero — a full-bleed, clickable promo image (self-contained graphic).
+ */
+
+.drill-hero .dh-link {
+  display: block;
+}
+
+.drill-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

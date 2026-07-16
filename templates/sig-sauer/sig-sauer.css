@@ -75,6 +75,19 @@ body.sig-sauer-template main > .section:first-child .hero {
   --min-height: 896px;
 }
 
+/* Primary hero — anchor the content overlay to the lower-left */
+body.sig-sauer-template main > .section:first-child .hero-foreground {
+  max-width: none;
+  margin: 0;
+}
+
+body.sig-sauer-template main > .section:first-child .fg-text {
+  position: absolute;
+  left: 72px;
+  bottom: 90px;
+  max-width: 620px;
+}
+
 /* Eyebrow (authored as h3, e.g. NOW AVAILABLE) */
 body.sig-sauer-template .hero-foreground h3 {
   margin: 0 0 10px;

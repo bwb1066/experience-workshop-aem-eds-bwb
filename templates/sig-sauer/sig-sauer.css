@@ -405,7 +405,6 @@ body.sig-sauer-template .btn-group {
    injected by sig-sauer.js into the actions cell). */
 body.sig-sauer-template header {
   background: var(--sig-black);
-  border-bottom: 1px solid var(--sig-line);
 }
 
 body.sig-sauer-template header a {
@@ -513,10 +512,9 @@ body.sig-sauer-template header .main-nav-section a[href$="/shop"]:hover {
   color: var(--sig-black);
 }
 
-/* Divider between the SHOP group and the secondary links */
+/* Extra gap between the SHOP group and the secondary links (no divider line). */
 body.sig-sauer-template header .main-nav-item:has(a[href$="/shop"]) + .main-nav-item {
   padding-left: 24px;
-  border-left: 1px solid var(--sig-line);
 }
 
 /* --- Mega menu -------------------------------------------------------------

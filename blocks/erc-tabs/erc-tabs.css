@@ -1,0 +1,108 @@
+.erc-tabs {
+  --erc-tab-accent: #005c9f;
+  --erc-tab-active: #255a9b;
+
+  .erc-tabs-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+  }
+
+  .erc-tab {
+    all: unset;
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    min-height: 64px;
+    padding: 16px 20px;
+    background: #fff;
+    color: #1a1a1a;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 18%);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      color: var(--erc-tab-accent);
+      box-shadow: 0 6px 16px rgb(0 0 0 / 22%);
+    }
+
+    &[aria-selected="true"] {
+      background: var(--erc-tab-active);
+      color: #fff;
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--erc-tab-accent);
+      outline-offset: 3px;
+    }
+  }
+
+  .erc-tab-panel {
+    padding: 28px 4px 8px;
+    outline: none;
+
+    &[hidden] {
+      display: none;
+    }
+
+    > .default-content,
+    > .block-content {
+      max-width: none;
+      margin: 0;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      color: var(--erc-tab-accent);
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0 0 12px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+}
+
+@media (width >= 900px) {
+  .erc-tabs {
+    .erc-tabs-list {
+      grid-template-columns: repeat(var(--erc-tab-count, 3), 1fr);
+      gap: 0;
+      box-shadow: 0 3px 12px rgb(0 0 0 / 18%);
+    }
+
+    .erc-tab {
+      min-height: 88px;
+      box-shadow: none;
+    }
+
+    .erc-tab-panel {
+      padding: 32px 56px 8px;
+    }
+  }
+
+  /* 4+ tabs (Resource Guides) read as separate cards, like the original */
+  .erc-tabs:has(.erc-tab:nth-child(4)) {
+    .erc-tabs-list {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px 24px;
+      box-shadow: none;
+    }
+
+    .erc-tab {
+      min-height: 56px;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 18%);
+    }
+
+    .erc-tab-panel {
+      padding-inline: 20px;
+    }
+  }
+}

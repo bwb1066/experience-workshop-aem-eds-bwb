@@ -506,3 +506,547 @@ body.ms-template {
     }
   }
 }
+
+/* =====================================================================
+   Employer Resource Center (/ms/erc/…) — pages with an erc-sidebar section
+   ===================================================================== */
+body.ms-template:has(main > .erc-sidebar) {
+  --erc-side: 300px;
+  --erc-pad: clamp(20px, 5vw, 64px);
+  --erc-navy: #0b2257;
+  --erc-blue: #005c9f;
+  --erc-sky: #1592d1;
+  --erc-light: #5ab4e5;
+
+  color: #1a1a1a;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-100 -100 200 200'%3E%3Cg fill='%23ededed'%3E%3Crect x='-11' y='-100' width='22' height='57'/%3E%3Crect x='-11' y='-100' width='22' height='57' transform='rotate(30)'/%3E%3Crect x='-11' y='-100' width='22' height='57' transform='rotate(60)'/%3E%3Crect x='-11' y='-100' width='22' height='57' transform='rotate(90)'/%3E%3Crect x='-11' y='-100' width='22' height='57' transform='rotate(120)'/%3E%3Crect x='-11' y='-100' width='22' height='57' transform='rotate(150)'/%3E%3Crect x='-11' y='-100' width='22' height='57' transform='rotate(180)'/%3E%3Crect x='-11' y='-100' width='22' height='57' transform='rotate(210)'/%3E%3Crect x='-11' y='-100' width='22' height='57' transform='rotate(240)'/%3E%3Crect x='-11' y='-100' width='22' height='57' transform='rotate(270)'/%3E%3Crect x='-11' y='-100' width='22' height='57' transform='rotate(300)'/%3E%3Crect x='-11' y='-100' width='22' height='57' transform='rotate(330)'/%3E%3C/g%3E%3C/svg%3E")
+    no-repeat right -140px top 300px / 460px,
+    #fff;
+
+  main > .section {
+    padding: 32px var(--erc-pad);
+
+    > .default-content,
+    > .block-content {
+      max-width: 1040px;
+      margin-inline: 0;
+    }
+  }
+
+  main h2 {
+    margin: 0 0 12px;
+    color: var(--erc-blue);
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  main p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* ---------- sidebar (fragment /ms/fragments/erc/sidebar) ---------- */
+  main > .erc-sidebar {
+    z-index: 20;
+    padding: 0;
+    background: var(--erc-navy);
+    color: #fff;
+
+    --sb-pad-l: 28px;
+    --sb-pad-r: 28px;
+
+    > .default-content {
+      padding: 36px var(--sb-pad-r) 0 var(--sb-pad-l);
+    }
+
+    p:has(> a > picture, > picture) {
+      margin: 0;
+
+      img {
+        display: block;
+        width: 190px;
+        height: auto;
+      }
+    }
+
+    h2 {
+      margin: 40px 0 14px;
+      color: #fff;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0 0 32px;
+      padding: 0;
+    }
+
+    li {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      picture,
+      img {
+        display: block;
+        flex: none;
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+      }
+
+      a {
+        padding: 7px 0;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+
+        &:hover,
+        &:focus-visible {
+          color: var(--erc-light);
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
+      }
+
+      &.is-active a {
+        color: var(--erc-light);
+        font-weight: 800;
+      }
+    }
+
+    /* Plan Sponsor Campaign Toolkit band */
+    p:has(> strong:only-child),
+    p:has(> strong:only-child) + p {
+      margin: 0 calc(var(--sb-pad-r) * -1) 0 calc(var(--sb-pad-l) * -1);
+      padding: 0 var(--sb-pad-r) 0 var(--sb-pad-l);
+      background: var(--erc-sky);
+    }
+
+    p:has(> strong:only-child) {
+      padding-top: 18px;
+      border-top: 2px solid #fff;
+      font-size: 17px;
+    }
+
+    p:has(> strong:only-child) + p {
+      padding-bottom: 18px;
+      border-bottom: 2px solid #fff;
+
+      a {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+
+        &::after {
+          content: ' \203A';
+        }
+
+        &:hover,
+        &:focus-visible {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .erc-menu-toggle {
+    display: none;
+  }
+
+  /* ---------- page header ---------- */
+  main > .erc-header {
+    --erc-hero-h: clamp(200px, 24vw, 320px);
+
+    padding-top: 0;
+
+    > .default-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      max-width: none;
+    }
+
+    p:has(> picture) {
+      order: -1;
+      max-width: none;
+      margin: 0 calc(var(--erc-pad) * -1);
+
+      picture {
+        display: block;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: var(--erc-hero-h);
+        object-fit: cover;
+      }
+    }
+
+    /* "Next Topic" sits on the photo's bottom-right edge */
+    p:has(> a.btn) {
+      position: absolute;
+      top: var(--erc-hero-h);
+      right: calc(var(--erc-pad) * -1);
+      margin: 0;
+      transform: translateY(calc(-100% - 22px));
+    }
+
+    a.btn {
+      padding: 10px 18px;
+      border: 0;
+      border-radius: 0;
+      background: var(--ms-magenta);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+
+      &::after {
+        content: ' \203A';
+      }
+
+      &:hover,
+      &:focus-visible {
+        background: #6f1f6a;
+      }
+    }
+
+    > .default-content > p:first-child {
+      margin: 36px 0 0;
+      color: var(--erc-sky);
+      font-size: 20px;
+    }
+
+    h1 {
+      margin: 2px 0 20px;
+      color: var(--erc-blue);
+      font-size: clamp(38px, 5vw, 60px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    h3 {
+      margin: 20px 0 4px;
+      color: var(--erc-blue);
+      font-size: 18px;
+    }
+
+    p:not(:has(> picture)) {
+      max-width: 72ch;
+    }
+  }
+
+  /* header without a photo keeps the button with the text */
+  main > .erc-header:not(:has(picture)) {
+    padding-top: 32px;
+
+    p:has(> a.btn) {
+      position: static;
+      margin: 8px 0 0;
+      transform: none;
+    }
+  }
+
+  /* ---------- content ---------- */
+  main > .section:has(.erc-guides) > .default-content:first-child {
+    padding-top: 36px;
+    border-top: 1px solid #d9d9d9;
+  }
+
+  .columns {
+    --columns-gap: 40px;
+
+    .row {
+      align-items: start;
+    }
+
+    a.btn {
+      display: block;
+      margin: 4px 0 10px;
+      padding: 14px 18px;
+      border: 0;
+      border-radius: 0;
+      background: var(--ms-magenta);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+
+      &:hover,
+      &:focus-visible {
+        background: #6f1f6a;
+      }
+    }
+
+    .col > p:first-child:not(:has(a, picture)) {
+      margin-bottom: 0;
+      color: #555;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      box-shadow: 0 6px 20px rgb(0 0 0 / 15%);
+    }
+  }
+
+  /* lists with check marks: participant checklist + dashboard factors */
+  .erc-checklist ul,
+  .columns ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      position: relative;
+      margin: 10px 0;
+      padding-left: 34px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 1px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='m6 11.5 3.2 3.2L16 8' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / contain no-repeat,
+        var(--erc-sky);
+    }
+
+    em {
+      color: #888a8b;
+      font-style: normal;
+    }
+  }
+
+  /* Overview lifecycle list (icon + term) */
+  main > .section:not(.erc-sidebar) ul:has(> li > picture) {
+    list-style: none;
+    padding: 0;
+
+    li {
+      position: relative;
+      margin: 14px 0;
+      padding-left: 42px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    picture {
+      position: absolute;
+      left: 0;
+      top: -2px;
+    }
+
+    img {
+      display: block;
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    strong {
+      color: var(--erc-blue);
+    }
+  }
+
+  /* "See the latest updates" banner */
+  main > .erc-banner {
+    padding-block: 32px 0;
+
+    p {
+      margin: 0;
+      padding: 16px 24px;
+      background: linear-gradient(180deg, #0b5ea6, var(--erc-navy));
+      color: #fff;
+    }
+
+    a {
+      color: #7fc4ee;
+      font-weight: 700;
+      text-decoration: none;
+
+      &:hover,
+      &:focus-visible {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  /* ---------- footer (fragment /ms/fragments/erc/footer) ---------- */
+  main > .erc-footer {
+    margin-top: auto;
+    padding-block: 28px;
+    background: var(--erc-navy);
+    color: #fff;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 26px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 12px;
+    }
+
+    li {
+      margin: 0;
+    }
+
+    a {
+      display: inline-block;
+      padding-block: 6px;
+      color: #fff;
+      text-underline-offset: 3px;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--erc-light);
+      }
+    }
+  }
+}
+
+@media (width >= 900px) {
+  body.ms-template:has(main > .erc-sidebar) {
+    main > .erc-sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: var(--erc-side);
+      overflow-y: auto;
+    }
+
+    main > .section:not(.erc-sidebar) {
+      margin-left: var(--erc-side);
+    }
+  }
+}
+
+@media (width < 900px) {
+  body.ms-template:has(main > .erc-sidebar) {
+    background-size: 300px;
+    background-position: right -120px top 380px;
+
+    main > .erc-sidebar {
+      position: sticky;
+      top: 0;
+
+      --sb-pad-l: var(--erc-pad);
+      --sb-pad-r: 72px;
+
+      > .default-content {
+        padding-block: 12px;
+      }
+
+      p:has(> a > picture, > picture) img {
+        width: 150px;
+      }
+
+      &:not(.is-open) > .default-content > :not(:first-child) {
+        display: none;
+      }
+
+      &.is-open {
+        max-height: 100dvh;
+        overflow-y: auto;
+
+        > .default-content {
+          padding-bottom: 8px;
+        }
+      }
+
+      h2 {
+        margin-top: 20px;
+      }
+    }
+
+    .erc-menu-toggle {
+      display: grid;
+      position: absolute;
+      top: 8px;
+      right: var(--erc-pad);
+      z-index: 1;
+    }
+  }
+}
+
+/* ---------- video player dialog (ms.js) ---------- */
+.ms-video-dialog {
+  width: min(960px, 100vw - 32px);
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: #000;
+  color: #fff;
+  box-shadow: 0 30px 80px rgb(0 0 0 / 50%);
+
+  &::backdrop {
+    background: rgb(4 18 48 / 78%);
+  }
+
+  .ms-video-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 12px 10px 20px;
+    background: #0b2257;
+
+    h2 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 700;
+    }
+  }
+
+  .ms-video-close {
+    all: unset;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      background: rgb(255 255 255 / 15%);
+    }
+  }
+
+  .ms-video-frame {
+    aspect-ratio: 16 / 9;
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  }
+
+  .ms-video-error {
+    margin: 0;
+    padding: 64px 24px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,74 @@
+.erc-guides {
+  --erc-guide-icon-color: #1f6fb2;
+
+  .erc-guides-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px 28px;
+
+    li {
+      margin: 0;
+    }
+  }
+
+  .erc-guide {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    align-items: center;
+    gap: 2px 14px;
+    padding: 10px 6px;
+    color: #1a1a1a;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      background: #eef4fa;
+
+      .erc-guide-label {
+        color: #005c9f;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid #005c9f;
+    }
+  }
+
+  .erc-guide-icon {
+    grid-row: span 2;
+    width: 36px;
+    height: 40px;
+    background: var(--erc-guide-icon-color);
+    mask: var(--erc-guide-mask) center / contain no-repeat;
+  }
+
+  .erc-guide-document {
+    --erc-guide-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 40' fill='none' stroke='%23000' stroke-width='1.6' stroke-linejoin='round'%3E%3Cpath d='M5 2h18l8 8v28H5z'/%3E%3Cpath d='M23 2v8h8M10 17h16M10 22h16M10 27h16M10 32h10'/%3E%3C/svg%3E");
+  }
+
+  .erc-guide-video {
+    --erc-guide-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 40' fill='none' stroke='%23000' stroke-width='1.6' stroke-linejoin='round'%3E%3Crect x='2' y='9' width='32' height='22' rx='1'/%3E%3Cpath d='m15 15 7 5-7 5z'/%3E%3C/svg%3E");
+  }
+
+  .erc-guide-badge {
+    grid-column: 2;
+    justify-self: start;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: #e6f2fb;
+    color: #0077c0;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+}

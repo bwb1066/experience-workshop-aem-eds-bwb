@@ -125,11 +125,16 @@ export default async function init(a) {
   const fragment = await loadFragment(path);
   if (fragment) {
     const elToReplace = getReplaceEl(a);
+    // A link alone in a section replaces the whole section — keep that
+    // section's styles (Section Metadata) on what replaces it.
+    const hostStyles = elToReplace.classList.contains('section')
+      ? [...elToReplace.classList] : [];
     const sections = fragment.querySelectorAll(':scope > .section');
     const children = sections.length === 1
       ? fragment.querySelectorAll(':scope > *')
       : [fragment];
     for (const [idx, child] of children.entries()) {
+      if (hostStyles.length && child.classList.contains('section')) child.classList.add(...hostStyles);
       // If relative, create a unique ID to help fragments
       // be identified after being inserted into the page
       if (path.startsWith('/')) child.id = btoa(encodeURIComponent(`${path}/${idx + 1}`));

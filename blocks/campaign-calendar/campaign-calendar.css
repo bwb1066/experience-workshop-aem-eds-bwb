@@ -1,0 +1,606 @@
+/*
+ * Campaign Calendar. Brand values are custom properties so a client template
+ * (templates/ms/ms.css) can retheme without touching layout.
+ */
+.campaign-calendar {
+  --cc-tile-bg: #7fbee7;
+  --cc-tile-ink: #002257;
+  --cc-tile-hover-bg: #28599a;
+  --cc-tile-hover-ink: #fff;
+  --cc-q-color: #7fbee7;
+  --cc-gap: 24px;
+
+  /* recolors the black source icons to the navy ink / white on hover */
+  --cc-icon-filter: brightness(0) saturate(100%) invert(11%) sepia(52%) saturate(3355%) hue-rotate(209deg) brightness(93%);
+  --cc-icon-filter-hover: brightness(0) invert(1);
+
+  display: grid;
+  gap: 28px;
+
+  .cc-quarter {
+    display: grid;
+    gap: 12px;
+  }
+
+  .cc-quarter-label {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    color: var(--cc-q-color);
+    line-height: 1;
+  }
+
+  .cc-q {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .cc-q-range {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .cc-months {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+
+    li {
+      margin: 0;
+    }
+  }
+
+  .cc-tile {
+    all: unset;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    grid-template-areas:
+      "icon month chev"
+      "icon title chev";
+    gap: 2px 16px;
+    align-items: center;
+    padding: 16px 18px;
+    background: var(--cc-tile-bg);
+    color: var(--cc-tile-ink);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 25%);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+    &::after {
+      content: '';
+      grid-area: chev;
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid currentcolor;
+      border-bottom: 2px solid currentcolor;
+      transform: rotate(-45deg);
+      opacity: 0.7;
+    }
+  }
+
+  div.cc-tile {
+    cursor: default;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .cc-icon {
+    grid-area: icon;
+    align-self: center;
+    width: 40px;
+    height: 40px;
+
+    picture,
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    img {
+      filter: var(--cc-icon-filter);
+      transition: filter 0.2s ease;
+    }
+  }
+
+  .cc-month {
+    grid-area: month;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
+
+  .cc-title {
+    grid-area: title;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  button.cc-tile:hover,
+  button.cc-tile:focus-visible {
+    background: var(--cc-tile-hover-bg);
+    color: var(--cc-tile-hover-ink);
+    box-shadow: 0 10px 24px rgb(0 0 0 / 30%);
+
+    .cc-month {
+      text-decoration-line: underline;
+    }
+
+    .cc-icon img {
+      filter: var(--cc-icon-filter-hover);
+    }
+  }
+
+  button.cc-tile:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+  }
+}
+
+/* Phones: sticky quarter headers over stacked month rows */
+@media (width < 720px) {
+  .campaign-calendar {
+    gap: 20px;
+
+    .cc-quarter-label {
+      position: sticky;
+      top: var(--cc-sticky-top, 0);
+      z-index: 2;
+      margin-inline: -16px;
+      padding: 10px 16px;
+      background: var(--cc-sticky-bg, #0d2656);
+      border-bottom: 1px solid rgb(255 255 255 / 15%);
+    }
+
+    .cc-q {
+      font-size: 22px;
+    }
+  }
+}
+
+/* Tablet: quarter label above a row of three */
+@media (width >= 720px) {
+  .campaign-calendar {
+    .cc-months {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--cc-gap);
+    }
+
+    .cc-tile {
+      grid-template-columns: 40px 1fr;
+      grid-template-areas:
+        "icon month"
+        ". title";
+      align-items: start;
+      align-content: start;
+      min-height: 132px;
+      padding: 20px;
+      row-gap: 10px;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    .cc-icon {
+      align-self: start;
+    }
+
+    button.cc-tile:hover {
+      transform: translateY(-3px);
+    }
+  }
+}
+
+/* Desktop: quarter rail on the left */
+@media (width >= 1000px) {
+  .campaign-calendar {
+    gap: 32px;
+
+    .cc-quarter {
+      grid-template-columns: 120px 1fr;
+      align-items: center;
+      gap: var(--cc-gap);
+    }
+
+    .cc-quarter-label {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .cc-q {
+      font-size: 52px;
+    }
+
+    .cc-tile {
+      min-height: 150px;
+      padding: 24px 28px;
+      column-gap: 18px;
+    }
+
+    .cc-month {
+      font-size: 24px;
+    }
+
+    .cc-title {
+      font-size: 18px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campaign-calendar .cc-tile,
+  .campaign-calendar .cc-icon img {
+    transition: none;
+  }
+
+  .campaign-calendar button.cc-tile:hover {
+    transform: none;
+  }
+}
+
+/* ---------- Month dialog ---------- */
+.cc-dialog {
+  --cc-accent: #005c9f;
+  --cc-tab-bg: #28599a;
+  --cc-ink: #1a1a1a;
+  --cc-muted: #8a8e96;
+  --cc-rule: #d7d9de;
+
+  width: min(1120px, 100vw - 48px);
+  max-width: none;
+  max-height: min(92vh, 960px);
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: #fff;
+  color: var(--cc-ink);
+  box-shadow: 0 30px 80px rgb(0 0 0 / 45%);
+  overflow: hidden;
+
+  &::backdrop {
+    background: rgb(4 18 48 / 72%);
+    backdrop-filter: blur(3px);
+  }
+
+  &[open] {
+    animation: cc-pop 0.22s ease-out;
+  }
+
+  .cc-dialog-inner {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    max-height: inherit;
+    position: relative;
+  }
+
+  .cc-dialog-body {
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 0 56px 40px;
+    outline: none;
+    transition: opacity 0.15s ease;
+
+    &.is-loading {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    &.is-loading:empty {
+      min-height: 50vh;
+    }
+  }
+
+  .cc-close {
+    all: unset;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 3;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--cc-rule);
+    background: #fff;
+    color: #555;
+    cursor: pointer;
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: #fff;
+      background: var(--cc-tab-bg);
+      border-color: var(--cc-tab-bg);
+    }
+  }
+
+  .cc-dialog-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 40px;
+    border-top: 1px solid var(--cc-rule);
+    background: #f5f7fa;
+
+    button {
+      all: unset;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 10px;
+      color: var(--cc-accent);
+      font-weight: 700;
+      cursor: pointer;
+
+      &[hidden] {
+        visibility: hidden;
+        display: inline-flex;
+      }
+
+      &:hover span,
+      &:focus-visible span {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--cc-accent);
+      }
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  /* ---- fragment content ---- */
+  .section {
+    display: block;
+  }
+
+  .columns .row {
+    align-items: start;
+    gap: 56px;
+  }
+
+  .col-1 {
+    > p:first-child {
+      display: inline-block;
+      margin: 0 0 8px;
+      padding: 10px 44px;
+      background: var(--cc-tab-bg);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      box-shadow: 0 3px 6px rgb(0 0 0 / 25%);
+    }
+
+    h2 {
+      margin: 32px 0 24px;
+      padding-right: 48px;
+      color: var(--cc-accent);
+      font-size: clamp(28px, 3.2vw, 40px);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    h3 {
+      margin: 24px 0 2px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--cc-ink);
+    }
+
+    h3::after {
+      content: ':';
+    }
+
+    p,
+    li {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul {
+      margin: 12px 0 20px;
+      padding-inline-start: 24px;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    h3:has(+ ul .cc-resource) {
+      margin-top: 32px;
+      color: var(--cc-accent);
+    }
+
+    ul:has(.cc-resource) {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 14px;
+    }
+  }
+
+  .cc-resource a {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--cc-accent);
+    font-size: 18px;
+    text-underline-offset: 4px;
+
+    &::before {
+      content: '';
+      flex: none;
+      width: 30px;
+      height: 30px;
+      background: currentcolor;
+      mask: var(--cc-res-icon) center / contain no-repeat;
+    }
+
+    &:hover {
+      color: var(--cc-tab-bg);
+    }
+  }
+
+  .cc-resource-document {
+    --cc-res-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.3' stroke-linejoin='round'%3E%3Cpath d='M6 2.5h8l4.5 4.5v14.5H6z'/%3E%3Cpath d='M14 2.5V7h4.5M9 11h7M9 14h7M9 17h7'/%3E%3C/svg%3E");
+  }
+
+  .cc-resource-email {
+    --cc-res-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.3' stroke-linejoin='round'%3E%3Crect x='2.5' y='5' width='19' height='14' rx='1'/%3E%3Cpath d='m3 6 9 7 9-7'/%3E%3C/svg%3E");
+  }
+
+  .cc-resource-newsletter {
+    --cc-res-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.3' stroke-linejoin='round'%3E%3Cpath d='M5 3.5h14v17H5z'/%3E%3Cpath d='M8 7h8v4H8zM8 14h8M8 17h5'/%3E%3C/svg%3E");
+  }
+
+  .col-2 {
+    position: sticky;
+    top: 72px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid #b6b8be;
+      box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+    }
+
+    &.cc-placeholder {
+      display: grid;
+      place-items: center;
+      min-height: 420px;
+      border: 2px dashed var(--cc-rule);
+      background: #f5f7fa;
+      text-align: center;
+      color: var(--cc-muted);
+      font-size: 30px;
+      font-weight: 700;
+
+      p {
+        margin: 0;
+        font: inherit;
+      }
+    }
+  }
+
+  .cc-error {
+    padding: 64px 0;
+    font-size: 18px;
+  }
+}
+
+@media (width >= 900px) {
+  .cc-dialog .columns .row {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+  }
+}
+
+@media (width < 900px) {
+  .cc-dialog {
+    width: 100vw;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    border-radius: 0;
+
+    .cc-dialog-inner {
+      height: 100%;
+    }
+
+    .cc-dialog-body {
+      padding: 0 20px 32px;
+    }
+
+    .cc-close {
+      top: 8px;
+      right: 8px;
+    }
+
+    .cc-dialog-nav {
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+    }
+
+    .col-1 > p:first-child {
+      margin-left: -20px;
+      padding: 10px 24px;
+      font-size: 16px;
+    }
+
+    .col-1 h2 {
+      margin-top: 24px;
+    }
+
+    .col-1 p,
+    .col-1 li {
+      font-size: 17px;
+    }
+
+    .columns .row {
+      gap: 24px;
+    }
+
+    .col-2 {
+      position: static;
+      max-width: 420px;
+      margin-inline: auto;
+
+      &.cc-placeholder {
+        min-height: 200px;
+      }
+    }
+  }
+}
+
+html:has(.cc-dialog[open]) {
+  overflow: hidden;
+}
+
+@keyframes cc-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-dialog[open] {
+    animation: none;
+  }
+}

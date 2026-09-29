@@ -49,6 +49,12 @@ const decorateArea = ({ area = document }) => {
   };
 
   eagerLoad(area, 'img');
+
+  // Blocks that open their fragments on demand (e.g. in a dialog) must not
+  // have them auto-inlined by the fragment link block.
+  area.querySelectorAll('.campaign-calendar a[href*="/fragments/"]').forEach((a) => {
+    if (!a.hash) a.href = `${a.href}#_dnb`;
+  });
 };
 
 export async function loadPage() {

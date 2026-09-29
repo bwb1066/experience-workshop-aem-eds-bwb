@@ -1,0 +1,483 @@
+/*
+ * MissionSquare (templates/ms). Auto-loaded for every page under /ms/ (see
+ * CLIENTS.md), so all rules are scoped to body.ms-template.
+ * Palette lifted from the Ceros Plan Sponsor Campaign Toolkit.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200..900&display=swap");
+
+body.ms-template {
+  --ms-navy-900: #081a3f;
+  --ms-navy-850: #0b2257;
+  --ms-navy-800: #0d2656;
+  --ms-navy-700: #133a78;
+  --ms-navy-600: #1d4f91;
+  --ms-blue: #005c9f;
+  --ms-blue-hover: #28599a;
+  --ms-sky: #7fbee7;
+  --ms-sky-bright: #6ac0eb;
+  --ms-magenta: #902b8a;
+  --ms-mist: #d7d9de;
+  --ms-max: 1240px;
+  --ms-gutter: 16px;
+  --ms-bar-height: 60px;
+  --font-family: "Nunito Sans", "Helvetica Neue", arial, sans-serif;
+
+  color-scheme: light;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+  color: #fff;
+  background: linear-gradient(180deg, var(--ms-navy-800) 0%, var(--ms-navy-700) 45%, var(--ms-navy-600) 100%);
+  -webkit-font-smoothing: antialiased;
+
+  /* keep the footer strip pinned to the bottom on tall screens */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main > .section {
+    padding-inline: var(--ms-gutter);
+
+    /* section-metadata.css paints section children with light-dark(); keep ours */
+    > * {
+      color: inherit;
+    }
+
+    > .default-content,
+    > .block-content {
+      max-width: var(--ms-max);
+      margin-inline: auto;
+    }
+  }
+
+  /* ---------- Hero (authored with the shared `hero` block) ---------- */
+  .toolkit-hero {
+    padding-block: 28px 32px;
+    background: var(--ms-navy-800);
+    border-bottom: 1px solid rgb(255 255 255 / 8%);
+
+    .hero {
+      --min-height: 0;
+
+      display: grid;
+      gap: 20px;
+      overflow: visible;
+      text-align: left;
+    }
+
+    .hero-background {
+      > div,
+      picture {
+        position: static;
+        background: none;
+      }
+
+      a {
+        display: inline-block;
+      }
+
+      img {
+        width: auto;
+        height: 34px;
+        object-fit: contain;
+      }
+    }
+
+    .hero .hero-foreground {
+      display: block;
+      min-height: 0;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      background: none;
+      text-align: left;
+    }
+
+    .fg-text {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 18px;
+      align-items: center;
+      width: auto;
+      margin: 0;
+
+      > h1 {
+        grid-row: 1 / span 2;
+        margin: 0;
+        padding-right: 18px;
+        border-right: 2px solid rgb(255 255 255 / 85%);
+        font-size: clamp(56px, 16vw, 84px);
+        font-weight: 200;
+        line-height: 0.9;
+        letter-spacing: -0.01em;
+      }
+
+      > h1 + p {
+        margin: 0;
+        align-self: end;
+        font-size: clamp(18px, 4.6vw, 24px);
+        font-weight: 700;
+        line-height: 1.1;
+      }
+
+      > h2 {
+        margin: 0;
+        align-self: start;
+        color: var(--ms-sky-bright);
+        font-size: clamp(28px, 8vw, 40px);
+        font-weight: 400;
+        line-height: 0.95;
+      }
+
+      > h2 + p {
+        grid-column: 1 / -1;
+        margin: 20px 0 0;
+        max-width: 68ch;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1.45;
+        color: rgb(255 255 255 / 88%);
+      }
+    }
+  }
+
+  /* ---------- Calendar section ---------- */
+  main > .section:has(.campaign-calendar) {
+    padding-block: 28px 48px;
+  }
+
+  .campaign-calendar {
+    --cc-sticky-top: var(--ms-bar-height);
+    --cc-sticky-bg: var(--ms-navy-800);
+    --cc-tile-bg: var(--ms-sky);
+    --cc-tile-hover-bg: var(--ms-blue-hover);
+    --cc-q-color: var(--ms-sky);
+  }
+
+  /* ---------- Footer strip ---------- */
+  .toolkit-footer {
+    --ms-erc-border: #bf57a0;
+
+    margin-top: auto;
+    padding-block: 32px 28px;
+    background: var(--ms-navy-850);
+
+    > .default-content {
+      display: grid;
+      gap: 16px;
+      justify-items: center;
+      text-align: center;
+    }
+
+    p {
+      margin: 0;
+      max-width: 62ch;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    a.btn {
+      padding: 14px 26px;
+      border: 2px solid var(--ms-erc-border);
+      border-radius: 0;
+      background: #fff;
+      color: var(--ms-magenta);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.2;
+      white-space: nowrap;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+      &:hover,
+      &:focus-visible {
+        background: var(--ms-magenta);
+        border-color: #fff;
+        color: #fff;
+      }
+    }
+
+    ul {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 30px;
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--ms-mist);
+    }
+
+    li {
+      margin: 0;
+    }
+
+    li a {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover,
+      &:focus-visible {
+        color: #fff;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  /* ---------- Mobile bar + hamburger menu (built by ms.js) ---------- */
+  .ms-bar {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 20;
+    height: var(--ms-bar-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: var(--ms-gutter);
+    background: transparent;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .ms-bar-logo {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    img {
+      display: block;
+      width: auto;
+      height: 26px;
+    }
+  }
+
+  .ms-bar.is-scrolled,
+  .ms-bar.is-open {
+    background: var(--ms-navy-900);
+    box-shadow: 0 2px 12px rgb(0 0 0 / 35%);
+
+    .ms-bar-logo {
+      opacity: 1;
+    }
+  }
+
+  .ms-burger {
+    all: unset;
+    box-sizing: border-box;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    display: grid;
+    place-items: center;
+    border-radius: 4px;
+    background: var(--ms-navy-900);
+    border: 1px solid rgb(255 255 255 / 25%);
+    cursor: pointer;
+
+    span,
+    span::before,
+    span::after {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #fff;
+      border-radius: 1px;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    span {
+      position: relative;
+    }
+
+    span::before,
+    span::after {
+      content: '';
+      position: absolute;
+      left: 0;
+    }
+
+    span::before { top: -6px; }
+    span::after { top: 6px; }
+
+    &[aria-expanded="true"] span { background: transparent; }
+    &[aria-expanded="true"] span::before { transform: translateY(6px) rotate(45deg); }
+    &[aria-expanded="true"] span::after { transform: translateY(-6px) rotate(-45deg); }
+
+    &:focus-visible {
+      outline: 2px solid var(--ms-sky);
+      outline-offset: 2px;
+    }
+  }
+
+  .ms-menu {
+    position: fixed;
+    inset: var(--ms-bar-height) 0 0;
+    z-index: 19;
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 8px var(--ms-gutter) 32px;
+    background: var(--ms-navy-900);
+
+    &[hidden] {
+      display: none;
+    }
+
+    h2 {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin: 20px 0 6px;
+      color: var(--ms-sky);
+      font-size: 20px;
+      font-weight: 700;
+
+      small {
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      margin: 0;
+      border-bottom: 1px solid rgb(255 255 255 / 10%);
+    }
+
+    li a {
+      display: grid;
+      padding: 12px 0;
+      color: #fff;
+      text-decoration: none;
+
+      strong {
+        font-size: 17px;
+      }
+
+      span {
+        font-size: 14px;
+        color: rgb(255 255 255 / 75%);
+      }
+
+      &:hover strong,
+      &:focus-visible strong {
+        text-decoration: underline;
+      }
+    }
+
+    .ms-menu-cta {
+      margin-top: 28px;
+      text-align: center;
+
+      a {
+        display: inline-block;
+        padding: 12px 22px;
+        border: 2px solid var(--ms-magenta);
+        background: #fff;
+        color: var(--ms-magenta);
+        font-weight: 700;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &:has(.ms-menu:not([hidden])) {
+    overflow: hidden;
+  }
+}
+
+/* Phones: the hero logo gives way to the hamburger on the right */
+@media (width < 900px) {
+  body.ms-template .toolkit-hero {
+    padding-top: 18px;
+
+    .hero-background {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      padding-right: 56px;
+    }
+  }
+}
+
+@media (width >= 600px) {
+  body.ms-template {
+    --ms-gutter: 32px;
+  }
+}
+
+@media (width >= 900px) {
+  body.ms-template {
+    --ms-gutter: 40px;
+
+    .ms-bar,
+    .ms-menu {
+      display: none;
+    }
+
+    .toolkit-hero {
+      padding-block: 40px 36px;
+
+      .hero {
+        grid-template-columns: auto 1fr;
+        align-items: start;
+        column-gap: 56px;
+      }
+
+      .hero-background {
+        padding-top: 18px;
+
+        img {
+          height: 44px;
+        }
+      }
+
+      .fg-text {
+        column-gap: 28px;
+
+        > h1 {
+          padding-right: 28px;
+          font-size: clamp(88px, 8.4vw, 120px);
+          line-height: 1;
+        }
+
+        > h1 + p {
+          font-size: clamp(24px, 2.1vw, 30px);
+        }
+
+        > h2 {
+          font-size: clamp(44px, 4.2vw, 60px);
+          line-height: 0.8;
+          white-space: nowrap;
+        }
+
+        > h2 + p {
+          margin-top: 16px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    main > .section:has(.campaign-calendar) {
+      padding-block: 48px 64px;
+    }
+
+    .toolkit-footer > .default-content {
+      grid-template-columns: auto minmax(0, 62ch);
+      justify-content: center;
+      align-items: center;
+      column-gap: 48px;
+      text-align: left;
+    }
+  }
+}
